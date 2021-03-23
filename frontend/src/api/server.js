@@ -1,4 +1,4 @@
-import { createServer, Model, Response } from 'miragejs';
+import { createServer, Model, Response, RestSerializer } from 'miragejs';
 import productsData from './products';
 
 export function makeServer() {
@@ -15,18 +15,19 @@ export function makeServer() {
             products: Model,
         },
 
-        //Routes
+        //routes
         routes() {
             this.namespace = "api"
 
             this.get("/products", (schema, request) => {
                 return schema.products.all()
             })
+
         },
 
         //Dummy Data
         seeds(server) {
-            productsData.map((product) => server.create("products", product))
+            productsData.map((product) => server.create("product", product))
         },
 
     })
