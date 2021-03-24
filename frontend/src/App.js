@@ -1,11 +1,10 @@
 import React from 'react';
+import Landing from './screens/Landing';
 
 const App = () => {
-
-
   return (
     <div>
-      E-commerce App
+      <Landing />
     </div>
   )
 }
