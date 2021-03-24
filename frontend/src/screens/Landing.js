@@ -1,14 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import landing from '../assets/images/landing.jpg';
+import Navbar from '../components/Navbar';
 
-const Landing = props => {
+const Landing = () => {
     return (
-        <div>
+        <>
             <Navbar />
-        </div>
+            <img src={landing} alt="landing-img" className="image" />
+        </>
     )
 }
-
-
 
 export default Landing
