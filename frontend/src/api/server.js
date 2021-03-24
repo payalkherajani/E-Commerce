@@ -1,4 +1,4 @@
-import { createServer, Model, Response, RestSerializer } from 'miragejs';
+import { createServer, Model, RestSerializer } from 'miragejs';
 import productsData from './products';
 
 export function makeServer() {
@@ -13,6 +13,7 @@ export function makeServer() {
         //Models
         models: {
             products: Model,
+            cart: Model,
         },
 
         //routes
@@ -22,7 +23,14 @@ export function makeServer() {
             this.get("/products", (schema, request) => {
                 return schema.products.all()
             })
-
+            this.get('/product/:id', (schema, request) => {
+                const id = request.params.id;
+                return schema.products.find(id)
+            })
+            this.post('/cart', (schema, request) => {
+                const data = JSON.parse(request.requestBody);
+                return schema.cart.create(data)
+            })
         },
 
         //Dummy Data
