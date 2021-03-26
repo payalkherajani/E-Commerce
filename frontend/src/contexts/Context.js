@@ -6,7 +6,9 @@ export const Context = createContext({});
 const initialState = {
     products: [],
     cart: [],
-    wishlist: []
+    wishlist: [],
+    error: '',
+    loading: false
 }
 
 export const Provider = ({ children }) => {
