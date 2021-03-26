@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
-
+import useCustomContext from '../customHooks/Hook';
 
 const Products = () => {
+
+    const { state, dispatch } = useCustomContext();
 
     const fetchProductsData = async () => {
         try {
