@@ -8,7 +8,8 @@ const initialState = {
     cart: [],
     wishlist: [],
     error: '',
-    loading: false
+    loading: false,
+    product: {}
 }
 
 export const Provider = ({ children }) => {
