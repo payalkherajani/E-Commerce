@@ -1,7 +1,9 @@
 import { PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_REQUEST, PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS } from '../constants/ProductConstants';
+import { ADD_TO_WISHLIST } from '../constants/WishListConstants';
 
 export const reducer = (state, action) => {
     const { type, payload } = action;
+    console.log(state);
 
     switch (type) {
 
@@ -22,6 +24,9 @@ export const reducer = (state, action) => {
 
         case PRODUCTS_LIST_FAILURE:
             return { ...state, error: payload, loading: false }
+
+        case ADD_TO_WISHLIST:
+            return { ...state, wishlist: [...state.wishlist, payload] }
 
         default:
             return state

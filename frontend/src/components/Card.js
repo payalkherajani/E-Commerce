@@ -1,8 +1,21 @@
 import React from 'react';
 import Rating from './Rating';
 import { Link } from 'react-router-dom';
+import useCustomContext from '../customHooks/Hook';
+import { ADD_TO_WISHLIST } from '../constants/WishListConstants';
 
-const Card = ({ id, name, image, price, numReviews, rating }) => {
+const Card = ({ product }) => {
+
+    const { id, name, image, price, numReviews, rating } = product;
+    const { state: { wishlist }, dispatch } = useCustomContext();
+
+    const addToWishlist = () => {
+        dispatch({ type: ADD_TO_WISHLIST, payload: product })
+    }
+
+    const check = () => {
+        return !!wishlist.find((x) => x.id === id);
+    }
 
     return (
         <div className="card card-secondary fixed-width">
@@ -13,11 +26,15 @@ const Card = ({ id, name, image, price, numReviews, rating }) => {
                 <Rating value={rating} numReviews={`${numReviews} reviews`} />
             </div>
             <div className="card-footer">
-                <button className="btn btn-outline-secondary">Wishlist</button>
-                <button className="btn btn-outline-secondary">Cart</button>
+                {
+                    check() === true ?
+                        <button disabled className="btn btn-outline-danger">Added To Wishlist</button>
+                        :
+                        <button onClick={addToWishlist} className="btn btn-outline-secondary">Wishlist</button>
+                }
             </div>
         </div>
     )
 }
 
-export default Card
+export default Card;

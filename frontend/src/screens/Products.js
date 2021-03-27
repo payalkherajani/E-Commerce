@@ -26,6 +26,7 @@ const Products = () => {
         fetchProducts()
     }, []);
 
+    console.log({ state })
     return (
         <div className="container">
             <Sidebar />
@@ -36,7 +37,7 @@ const Products = () => {
                             {
                                 products.map((product) => (
                                     <Fragment key={product.id} >
-                                        <Card {...product} />
+                                        <Card product={product} />
                                     </Fragment>
                                 ))
                             }
