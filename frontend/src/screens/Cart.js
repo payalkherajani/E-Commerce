@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ADD_ITEM_TO_CART, REMOVE_FROM_CART, REMOVE_ITEM_FROM_CART } from '../constants/CartConstants';
+import { ADD_ITEM_TO_CART, REMOVE_FROM_CART } from '../constants/CartConstants';
 import useCustomContext from '../customHooks/Hook';
 
 
