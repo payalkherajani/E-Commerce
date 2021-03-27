@@ -5,6 +5,8 @@ import Landing from './screens/Landing';
 import Products from './screens/Products';
 import Navbar from './components/Navbar'
 import SingleProduct from './screens/SingleProduct';
+import WishList from './screens/WishList';
+import Cart from './screens/Cart';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
             <Route exact path='/' component={Landing} />
             <Route exact path='/products' component={Products} />
             <Route exact path='/product/:id' component={SingleProduct} />
+            <Route exact path='/wishlist' component={WishList} />
+            <Route exact path='/cart' component={Cart} />
           </Fragment>
         </Switch>
       </Router>

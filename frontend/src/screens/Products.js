@@ -26,7 +26,6 @@ const Products = () => {
         fetchProducts()
     }, []);
 
-    console.log({ state })
     return (
         <div className="container">
             <Sidebar />
