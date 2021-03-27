@@ -23,3 +23,23 @@ a{
     justify-content: center;
     gap: 1rem;
 }
+
+.d-flex{
+    display: flex;
+    gap: 1rem;
+}
+.wrap{
+    flex-wrap: wrap;
+}
+.fixed-width{
+    width: 100%;
+}
+.flex-grow-1{
+    flex-grow: 1;
+}
+.flex-direction-column{
+    flex-direction: column;
+}
+@media only screen and (min-width: 768px){
+  
+}

@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import useCustomContext from '../customHooks/Hook';
 import axios from 'axios';
 import { PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../constants/ProductConstants';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Card from '../components/Card';
 
 const Products = () => {
 
@@ -31,8 +32,14 @@ const Products = () => {
             <div className="main">
                 {
                     loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                        <ul>
-                            <li>Hello</li>
+                        <ul className="d-flex wrap">
+                            {
+                                products.map((product) => (
+                                    <Fragment key={product.id} >
+                                        <Card {...product} />
+                                    </Fragment>
+                                ))
+                            }
                         </ul>
                     )
                 }
