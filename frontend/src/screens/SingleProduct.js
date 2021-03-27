@@ -5,7 +5,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { ADD_TO_CART } from '../constants/CartConstants';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const SingleProduct = ({ match: { params: { id } } }) => {
     const { state, dispatch } = useCustomContext();
@@ -27,7 +27,8 @@ const SingleProduct = ({ match: { params: { id } } }) => {
     }, [])
 
     const addToCart = () => {
-        dispatch({ type: ADD_TO_CART, payload: product })
+        const updateQtyProduct = { ...product, qty: qty }
+        dispatch({ type: ADD_TO_CART, payload: updateQtyProduct })
     }
 
     const checkincart = () => {
@@ -42,6 +43,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                         <li>{product.name}</li>
                         <li>{product.description}</li>
                         <li>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</li>
+                        <li>{product.countInStock}</li>
                         <li>
                             <select value={qty} onChange={(e) => setQty((qty) => Number(e.target.value))}>
                                 {
@@ -58,7 +60,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                                 checkincart() === true ?
                                     <button disabled>Added to cart already</button>
                                     :
-                                    <Link to={{ pathname: '/cart', state: qty }}><button onClick={addToCart} disabled={product.countInStock === 0}>Add to cart</button></Link>
+                                    <button onClick={() => addToCart()} disabled={product.countInStock === 0}>Add to cart</button>
                             }
                         </li>
                     </ul>
