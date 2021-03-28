@@ -3,16 +3,14 @@ import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../cons
 import useCustomContext from '../customHooks/Hook';
 
 const Sidebar = () => {
-
-    const { dispatch } = useCustomContext();
+    const { state: { sortBy }, dispatch } = useCustomContext();
 
     const handlePriceSorting = (e) => {
         const { name } = e.target;
-        console.log({ name });
         if (name === 'ascending') {
-            dispatch({ type: PRICE_LOW_TO_HIGH })
+            dispatch({ type: PRICE_LOW_TO_HIGH, payload: PRICE_LOW_TO_HIGH })
         } else {
-            dispatch({ type: PRICE_HIGH_TO_LOW })
+            dispatch({ type: PRICE_HIGH_TO_LOW, payload: PRICE_HIGH_TO_LOW })
         }
     }
 
@@ -20,21 +18,19 @@ const Sidebar = () => {
         dispatch({ type: CLEAR_ALL_FILTERS })
     }
     return (
-        <>
-            <aside className="sidebar">
-                <button onClick={clearFilters}>Clear All Filters</button>
-                <ul className="sidebar-list-group">
-                    <li className="sidebar-list-item gray" >
-                        <button onClick={handlePriceSorting} name="ascending"> Low To High</button>
-                    </li>
-                    <li className="sidebar-list-item gray">
-                        <button onClick={handlePriceSorting} name="descending">
-                            High to Low
-                            </button>
-                    </li>
-                </ul>
-            </aside>
-        </>
+        <section className="sidebar sidebar-top">
+            <button onClick={clearFilters} className="btn btn-danger">Clear All Filters</button>
+            <ul className="sidebar-list-group">
+                <li className="sidebar-list-item gray" >
+                    <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} />
+                    <label> LOW TO HIGH </label>
+                </li>
+                <li className="sidebar-list-item gray">
+                    <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} />
+                    <label> HIGH TO LOW </label>
+                </li>
+            </ul>
+        </section>
     )
 }
 

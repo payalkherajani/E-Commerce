@@ -28,9 +28,9 @@ const Products = () => {
     }, []);
 
     return (
-        <div className="container">
+        <div className="container m-t-8">
             <Sidebar />
-            <div className="main">
+            <div className="main m-0">
                 {
                     loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                         <ul className="d-flex wrap">

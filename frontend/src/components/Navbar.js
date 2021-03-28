@@ -5,19 +5,34 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
     return (
-
-        <nav className="nav nav-dark m-b-0">
+        <nav className="nav nav-dark m-b-0 navbar-fixed-top">
             <h3 className="transform-lowercase"><Link to={{ pathname: '/' }}>safarnama</Link></h3>
             <button className="hamburger-icon" onClick={() => setVisible((visible) => !visible)}>
                 <img src={icon} />
             </button>
             <ul className={visible === true ? ("nav-list") : (" nav-list nav-list-none")}>
-                <li><Link to={{ pathname: '/products' }}>Products</Link></li>
-                <li><Link to={{ pathname: '/wishlist' }}>WishList</Link></li>
-                <li><Link to={{ pathname: '/cart' }}>Cart</Link></li>
+
+                <Link to={{ pathname: '/products' }}>
+                    <li className="navbar-list-item">
+                        <span>Products</span>
+                        <i className="fas fa-credit-card"></i>
+                    </li>
+                </Link>
+
+                <Link to={{ pathname: '/wishlist' }}>
+                    <li className="navbar-list-item">
+                        <span>WishList</span>
+                        <i className="far fa-heart"></i>
+                    </li>
+                </Link>
+                <Link to={{ pathname: '/cart' }}>
+                    <li className="navbar-list-item">
+                        <span>Cart</span>
+                        <i class="fas fa-shopping-bag"></i>
+                    </li>
+                </Link>
             </ul>
         </nav>
-
     )
 }
 

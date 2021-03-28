@@ -51,11 +51,11 @@ export const reducer = (state, action) => {
 
         case PRICE_HIGH_TO_LOW:
             const sortProductsdescending = state.products.sort((a, b) => b.price - a.price);
-            return { ...state, products: sortProductsdescending }
+            return { ...state, products: sortProductsdescending, sortBy: payload }
 
         case PRICE_LOW_TO_HIGH:
             const sortProductsascending = state.products.sort((a, b) => a.price - b.price)
-            return { ...state, products: sortProductsascending }
+            return { ...state, products: sortProductsascending, sortBy: payload }
 
         case CLEAR_ALL_FILTERS:
             const sortbyid = state.products.sort((a, b) => a.id - b.id)

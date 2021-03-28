@@ -9,7 +9,8 @@ const initialState = {
     wishlist: [],
     error: '',
     loading: false,
-    product: {}
+    product: {},
+    sortBy: null,
 }
 
 export const Provider = ({ children }) => {
