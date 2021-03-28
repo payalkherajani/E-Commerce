@@ -22,12 +22,16 @@ const Sidebar = () => {
             <button onClick={clearFilters} className="btn btn-danger">Clear All Filters</button>
             <ul className="sidebar-list-group">
                 <li className="sidebar-list-item gray" >
-                    <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} />
-                    <label> LOW TO HIGH </label>
+                    <label>
+                        <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} className="checkmark" />
+                         LOW TO HIGH
+                    </label>
                 </li>
                 <li className="sidebar-list-item gray">
-                    <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} />
-                    <label> HIGH TO LOW </label>
+                    <label>
+                        <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} className="checkmark" />
+                        HIGH TO LOW
+                    </label>
                 </li>
             </ul>
         </section>

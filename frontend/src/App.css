@@ -73,3 +73,23 @@ a{
 .m-0{
   margin: 0rem;
 }
+.m-l-1{
+ margin-left: 1rem;
+}
+
+
+/* Create a custom checkbox */
+input[type=radio]:checked {
+    border: 5px solid #0DFF92;
+}
+
+.checkmark {
+    position: relative;
+    top: 5px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    margin-right: 0.5rem;
+  }
+ 

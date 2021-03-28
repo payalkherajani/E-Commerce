@@ -59,7 +59,7 @@ export const reducer = (state, action) => {
 
         case CLEAR_ALL_FILTERS:
             const sortbyid = state.products.sort((a, b) => a.id - b.id)
-            return { ...state, products: sortbyid }
+            return { ...state, products: sortbyid, sortBy: null }
 
         default:
             return state
