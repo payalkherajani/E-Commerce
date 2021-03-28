@@ -33,7 +33,6 @@ const Sidebar = () => {
                             </button>
                     </li>
                 </ul>
-
             </aside>
         </>
     )
