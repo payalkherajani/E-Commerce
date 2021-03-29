@@ -3,10 +3,13 @@ import useCustomContext from '../../customHooks/Hook';
 import { PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../../constants/ProductConstants';
 import axios from 'axios';
 import { ADD_TO_CART } from '../../constants/CartConstants';
-import { Loader, Message } from '../../components'
+import { Loader, Message, Rating } from '../../components'
+import style from './singleproduct.module.css';
+import { Link } from 'react-router-dom';
 
 
 const SingleProduct = ({ match: { params: { id } } }) => {
+
     const { state, dispatch } = useCustomContext();
     const { product, loading, error, cart } = state;
     const [qty, setQty] = useState(1);
@@ -34,35 +37,48 @@ const SingleProduct = ({ match: { params: { id } } }) => {
         return !!cart.find((x) => x.id === product.id)
     }
 
+    const { name, description, countInStock, image, rating, numReviews, category, price } = product;
+
     return (
-        <div className="single-product-container">
+        <div className={style.single_product_container}>
+            <Link to={{ pathname: '/products' }} className="p-half"> <button className="btn btn-primary">Go Back</button> </Link>
             {
                 loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                    <ul className="d-flex wrap">
-                        <li>{product.name}</li>
-                        <li>{product.description}</li>
-                        <li>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</li>
-                        <li>{product.countInStock}</li>
-                        <li>
-                            <select value={qty} onChange={(e) => setQty((qty) => Number(e.target.value))}>
-                                {
-                                    [...Array(product.countInStock).keys()].map((x) => (
-                                        <option key={x} value={x + 1}>
-                                            { x + 1}
-                                        </option>
-                                    ))
-                                }
-                            </select>
-                        </li>
-                        <li>
-                            {
-                                checkincart() === true ?
-                                    <button disabled>Added to cart already</button>
-                                    :
-                                    <button onClick={() => addToCart()} disabled={product.countInStock === 0}>Add to cart</button>
-                            }
-                        </li>
-                    </ul>
+
+                    <div className={style.single_product_card}>
+
+                        <div className={style.single_product_image_container}>
+                            <img src={image} alt="single-product-image" className={style.single_product_image} />
+                        </div>
+
+                        <div className={style.single_product_details_container}>
+                            <ul className="list-group">
+                                <li className={style.list_item}><strong>{name}</strong></li>
+                                <li className={style.list_item}>{description}</li>
+                                <li className={style.list_item}>{countInStock > 0 ? 'In Stock' : 'Out of Stock'}</li>
+                                <li className={style.list_item}><Rating numReviews={numReviews} value={rating} /></li>
+                                <li className={style.list_item}>
+                                    <select value={qty} onChange={(e) => setQty((qty) => Number(e.target.value))} className="select-css">
+                                        {
+                                            [...Array(countInStock).keys()].map((x) => (
+                                                <option key={x} value={x + 1}>
+                                                    { x + 1}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+                                </li>
+                                <li className={style.list_item}>
+                                    {
+                                        checkincart() === true ?
+                                            <button disabled className="btn btn-success">Added to cart</button>
+                                            :
+                                            <button onClick={() => addToCart()} disabled={countInStock === 0} className="btn btn-info">Add to cart</button>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 )
             }
         </div>
@@ -70,3 +86,4 @@ const SingleProduct = ({ match: { params: { id } } }) => {
 }
 
 export default SingleProduct;
+

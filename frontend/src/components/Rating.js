@@ -61,7 +61,7 @@ const Rating = ({ value, numReviews, color }) => {
             </span>
 
             <span>
-                {numReviews && numReviews}
+                {numReviews && numReviews} reviews
             </span>
 
         </div>

@@ -1,3 +1,6 @@
+.app{
+    min-height: 100vh;
+}
 /* Navbar */
 .m-b-0{
     margin-bottom: 0rem;
@@ -142,5 +145,23 @@ input[type=radio]:checked {
     }
   }
 
-  /* --------------------------------------------------- SINGLE-PRODUCT --------------------------------------------------------- */
   
+
+  /* GENERALL */
+  .border-none{
+      border: none;
+  }
+  
+  .m-b-half{
+      margin-bottom: 0.5rem;
+  }
+  .p-half{
+   padding: 0.5rem;
+  }
+  .select-css{
+    display: block;
+    margin: 0;
+    border: 1px solid #aaa;
+     width: 100%; 
+     padding: 0.25rem 0.75rem;
+  }
