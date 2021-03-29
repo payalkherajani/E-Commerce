@@ -1,6 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { ADD_ITEM_TO_CART, REMOVE_FROM_CART } from '../../constants/CartConstants';
 import useCustomContext from '../../customHooks/Hook';
+import styles from './cart.module.css';
+import { Link } from 'react-router-dom';
+import { Message } from '../../components';
 
 const Cart = () => {
 
@@ -16,10 +19,58 @@ const Cart = () => {
     }
 
     return (
-        <div>
-            <h1>Items in cart {cart.length}</h1>
-            <h1>Total price {cart.reduce((acc, item) => acc + item.price * item.qty, 0)}</h1>
-            <ul>
+        <div className={styles.cart_container}>
+            <Link to='/products' className="p-half"><button className="btn btn-primary m-b-half">Go Back</button></Link>
+            {
+                cart.length === 0 ?
+                    (<Message>Your Cart is Empty</Message>)
+                    :
+                    (
+                        <div className={styles.single_cart_container}>
+                            <h3>Total price ₹{cart.reduce((acc, item) => acc + item.price * item.qty, 0)}</h3>
+                            {
+                                cart.map(({ name, price, qty, id, countInStock, image }) => (
+                                    <div key={id} className={styles.single_card_cart} >
+
+                                        <div className={styles.single_cart_image_container}>
+                                            <img src={image} alt="cart-image" className={styles.cart_image} />
+                                        </div>
+
+                                        <div className={styles.single_cart_details}>
+                                            <ul className="list-group">
+                                                <li className={styles.list_item}> <strong>{name} </strong></li>
+                                                <li className={styles.list_item}>₹{price}</li>
+                                                <li className={styles.list_item}>
+                                                    <select value={qty} onChange={(e) => addIteminCart(e, id)} className="select-css">
+                                                        {
+                                                            [...Array(countInStock).keys()].map((x) => (
+                                                                <option key={x} value={x + 1}>
+                                                                    { x + 1}
+                                                                </option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                </li>
+                                                <li className={styles.list_item}><button onClick={() => removefromcart(id)} className="btn btn-danger">Delete</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    )
+
+            }
+
+        </div>
+    )
+}
+
+export default Cart;
+
+
+
+{/* <ul>
                 {
                     cart.map((item) => (
                         <Fragment key={item.id}>
@@ -40,9 +91,4 @@ const Cart = () => {
                         </Fragment>
                     ))
                 }
-            </ul>
-        </div>
-    )
-}
-
-export default Cart;
+            </ul> */}
