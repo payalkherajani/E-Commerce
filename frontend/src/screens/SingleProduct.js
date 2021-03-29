@@ -5,7 +5,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { ADD_TO_CART } from '../constants/CartConstants';
-import { Link } from 'react-router-dom';
+
 
 const SingleProduct = ({ match: { params: { id } } }) => {
     const { state, dispatch } = useCustomContext();
@@ -36,7 +36,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
     }
 
     return (
-        <Fragment>
+        <div className="single-product-container">
             {
                 loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                     <ul className="d-flex wrap">
@@ -66,7 +66,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                     </ul>
                 )
             }
-        </Fragment>
+        </div>
     )
 }
 

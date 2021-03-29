@@ -23,13 +23,13 @@ const Sidebar = () => {
             <ul className="sidebar-list-group">
                 <li className="sidebar-list-item gray" >
                     <label>
-                        <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} className="checkmark" />
+                        <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} className="checkmark" value={PRICE_LOW_TO_HIGH} />
                          LOW TO HIGH
                     </label>
                 </li>
                 <li className="sidebar-list-item gray">
                     <label>
-                        <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} className="checkmark" />
+                        <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} className="checkmark" value={PRICE_HIGH_TO_LOW} />
                         HIGH TO LOW
                     </label>
                 </li>

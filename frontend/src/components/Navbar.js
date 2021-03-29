@@ -28,7 +28,7 @@ const Navbar = () => {
                 <Link to={{ pathname: '/cart' }}>
                     <li className="navbar-list-item">
                         <span>Cart</span>
-                        <i class="fas fa-shopping-bag"></i>
+                        <i className="fas fa-shopping-bag"></i>
                     </li>
                 </Link>
             </ul>
