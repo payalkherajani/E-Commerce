@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useCustomContext from '../../customHooks/Hook';
 import { REMOVE_FROM_WISHLIST } from '../../constants/WishListConstants';
+import { ADD_TO_CART } from '../../constants/CartConstants'
 import { Message, Rating } from '../../components';
 import { Link } from 'react-router-dom';
 import styles from './wishlist.module.css';
 
 const WishList = () => {
-    const { state: { wishlist }, dispatch } = useCustomContext();
+    const { state: { wishlist, cart }, dispatch } = useCustomContext();
+    const [qty, setQty] = useState(1);
 
     const removefromWishList = (id) => {
         dispatch({ type: REMOVE_FROM_WISHLIST, payload: id })
+    }
+
+    const addToCart = (item) => {
+        const updateQtyProduct = { ...item, qty: qty }
+        dispatch({ type: ADD_TO_CART, payload: updateQtyProduct })
+    }
+
+    const checkincart = (item) => {
+        return !!cart.find((x) => x.id === item.id)
     }
 
     return (
@@ -24,20 +35,39 @@ const WishList = () => {
                     (
                         <div className={styles.wishlist_card}>
                             {
-                                wishlist.map(({ id, name, description, image, price, numReviews, rating }) => (
-                                    <div key={id} className={styles.single_wishlist_card}>
+                                wishlist.map((item) => (
+                                    <div key={item.id} className={styles.single_wishlist_card}>
 
                                         <div className={styles.wishlist_image_container}>
-                                            <img src={image} className="wishlist_image" className={styles.wishlist_image} />
+                                            <img src={item.image} className="wishlist_image" className={styles.wishlist_image} />
                                         </div>
 
                                         <div className={styles.wishlist_details_container}>
                                             <ul className="list-group">
-                                                <li className={styles.list_item}><strong>{name}</strong></li>
-                                                <li className={styles.list_item}>{description}</li>
-                                                <li className={styles.list_item}>₹{price}</li>
-                                                <li className={styles.list_item}><Rating value={rating} numReviews={numReviews} /></li>
-                                                <li className={styles.list_item}><button className="btn btn-danger" onClick={() => removefromWishList(id)}>Remove</button></li>
+                                                <li className={styles.list_item}><strong>{item.name}</strong></li>
+                                                <li className={styles.list_item}>{item.description}</li>
+                                                <li className={styles.list_item}>₹{item.price}</li>
+                                                <li className={styles.list_item}><Rating value={item.rating} numReviews={item.numReviews} /></li>
+                                                <li className={styles.list_item}>
+                                                    <select value={qty} onChange={(e) => setQty((qty) => Number(e.target.value))} className="select-css">
+                                                        {
+                                                            [...Array(item.countInStock).keys()].map((x) => (
+                                                                <option key={x} value={x + 1}>
+                                                                    { x + 1}
+                                                                </option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                </li>
+                                                <li className={styles.list_item}>
+                                                    {
+                                                        checkincart(item) === true ?
+                                                            <button disabled className="btn btn-success">Added to cart</button>
+                                                            :
+                                                            <button onClick={() => addToCart(item)} disabled={item.countInStock === 0} className="btn btn-info">Add to cart</button>
+                                                    }
+                                                </li>
+                                                <li className={styles.list_item}><button className="btn btn-danger" onClick={() => removefromWishList(item.id)}>Remove</button></li>
                                             </ul>
                                         </div>
                                     </div>
