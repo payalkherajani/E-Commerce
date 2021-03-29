@@ -1,11 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
-import Sidebar from '../components/Sidebar';
-import useCustomContext from '../customHooks/Hook';
+import useCustomContext from '../../customHooks/Hook';
 import axios from 'axios';
-import { PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../constants/ProductConstants';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import Card from '../components/Card';
+import { PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../../constants/ProductConstants';
+import { Loader, Sidebar, Message, Card } from '../../components';
 
 
 const Products = () => {

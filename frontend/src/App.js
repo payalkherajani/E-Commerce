@@ -1,12 +1,8 @@
 import React, { Fragment } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Landing from './screens/Landing';
-import Products from './screens/Products';
+import { Products, SingleProduct, WishList, Cart, Landing } from './screens/index';
 import Navbar from './components/Navbar'
-import SingleProduct from './screens/SingleProduct';
-import WishList from './screens/WishList';
-import Cart from './screens/Cart';
 
 const App = () => {
   return (
