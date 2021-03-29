@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Products, SingleProduct, WishList, Cart, Landing } from './screens/index';
-import Navbar from './components/Navbar'
+import { Products, SingleProduct, WishList, Landing, Cart } from './screens';
+import { Navbar } from './components'
 
 const App = () => {
   return (

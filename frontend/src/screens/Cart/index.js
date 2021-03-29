@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import { ADD_ITEM_TO_CART, REMOVE_FROM_CART } from '../constants/CartConstants';
-import useCustomContext from '../customHooks/Hook';
-
+import { ADD_ITEM_TO_CART, REMOVE_FROM_CART } from '../../constants/CartConstants';
+import useCustomContext from '../../customHooks/Hook';
 
 const Cart = () => {
 
@@ -16,7 +15,6 @@ const Cart = () => {
         dispatch({ type: ADD_ITEM_TO_CART, payload: { newQty, id } })
     }
 
-    console.log({ cart });
     return (
         <div>
             <h1>Items in cart {cart.length}</h1>
@@ -39,14 +37,12 @@ const Cart = () => {
                                     }
                                 </select>
                             </li>
-
-
                         </Fragment>
                     ))
                 }
             </ul>
-
         </div>
     )
 }
+
 export default Cart;

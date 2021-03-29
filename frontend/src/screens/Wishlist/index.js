@@ -1,6 +1,6 @@
 import React from 'react';
-import useCustomContext from '../customHooks/Hook';
-import { REMOVE_FROM_WISHLIST } from '../constants/WishListConstants';
+import useCustomContext from '../../customHooks/Hook';
+import { REMOVE_FROM_WISHLIST } from '../../constants/WishListConstants';
 
 const WishList = () => {
     const { state: { wishlist }, dispatch } = useCustomContext();

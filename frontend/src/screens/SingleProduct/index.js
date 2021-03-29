@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import useCustomContext from '../customHooks/Hook';
-import { PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../constants/ProductConstants';
+import React, { useEffect, useState } from 'react';
+import useCustomContext from '../../customHooks/Hook';
+import { PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../../constants/ProductConstants';
 import axios from 'axios';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import { ADD_TO_CART } from '../constants/CartConstants';
+import { ADD_TO_CART } from '../../constants/CartConstants';
+import { Loader, Message } from '../../components'
 
 
 const SingleProduct = ({ match: { params: { id } } }) => {
