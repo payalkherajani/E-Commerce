@@ -15,20 +15,17 @@ const Navbar = () => {
                 <Link to={{ pathname: '/products' }}>
                     <li className="navbar-list-item">
                         <span>Products</span>
-                        <i className="fas fa-credit-card"></i>
                     </li>
                 </Link>
 
                 <Link to={{ pathname: '/wishlist' }}>
                     <li className="navbar-list-item">
                         <span>WishList</span>
-                        <i className="far fa-heart"></i>
                     </li>
                 </Link>
                 <Link to={{ pathname: '/cart' }}>
                     <li className="navbar-list-item">
                         <span>Cart</span>
-                        <i className="fas fa-shopping-bag"></i>
                     </li>
                 </Link>
             </ul>
