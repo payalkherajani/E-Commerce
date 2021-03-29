@@ -100,23 +100,22 @@ input[type=radio]:checked {
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgb(71, 71, 71);
     margin: 1rem;
-    display: flex;
+    display: grid;
     background: white;
     align-items: center;
     width: 100%;
     padding: 1rem;
     position: relative;
-    gap: 1rem;
+    gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+    font-size: 1.2rem;
   }
 
   .product-image-container{
-      flex-basis: 30%;
       width: 100%;
       margin: 0.5rem;
   }
-  .product-text-container{
-      flex-basis: 70%;
-  }
+ 
   .image{
       width: 100%;
       height: auto;
@@ -128,7 +127,6 @@ input[type=radio]:checked {
  
   @media only screen and (min-width: 768px){ 
     .product-card{
-        width: 85%;
         padding: 1rem;
     }
     .m-l-1{
@@ -141,7 +139,6 @@ input[type=radio]:checked {
 
   @media only screen and (min-width: 912px){
     .product-card{
-        width: 40%;
         padding: 1rem;
     }
     .product-card-footer{

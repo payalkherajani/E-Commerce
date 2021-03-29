@@ -3,6 +3,12 @@
     margin-top: 8rem;
     font-size: 1.2rem;
 }
+.cart_heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 .single_cart_container{
     padding: 0.5rem;
 }

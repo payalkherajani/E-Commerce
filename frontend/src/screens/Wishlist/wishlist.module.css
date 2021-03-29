@@ -3,6 +3,12 @@
     min-height: 100vh;
     font-size: 1.2rem;
 }
+.wishlist_heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 
 .wishlist_card{
   padding: 0.5rem;

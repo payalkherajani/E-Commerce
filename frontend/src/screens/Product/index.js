@@ -4,7 +4,6 @@ import axios from 'axios';
 import { PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../../constants/ProductConstants';
 import { Loader, Sidebar, Message, Card } from '../../components';
 
-
 const Products = () => {
 
     const { state, dispatch } = useCustomContext();

@@ -21,13 +21,14 @@ const Cart = () => {
     return (
         <div className={styles.cart_container}>
             <Link to='/products' className="p-half"><button className="btn btn-primary m-b-half">Go Back</button></Link>
+            <div className={styles.cart_heading}><h1>Aapka Cart</h1></div>
             {
                 cart.length === 0 ?
                     (<Message>Your Cart is Empty</Message>)
                     :
                     (
                         <div className={styles.single_cart_container}>
-                            <h3>Total price ₹{cart.reduce((acc, item) => acc + item.price * item.qty, 0)}</h3>
+                            <h3 className={styles.cart_heading}>Total price ₹{cart.reduce((acc, item) => acc + item.price * item.qty, 0)}</h3>
                             {
                                 cart.map(({ name, price, qty, id, countInStock, image }) => (
                                     <div key={id} className={styles.single_card_cart} >

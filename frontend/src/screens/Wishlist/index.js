@@ -15,6 +15,7 @@ const WishList = () => {
     return (
         <div className={styles.wishlist_container}>
             <Link to='/products' className="p-half"><button className="btn btn-primary m-b-half">Go Back</button></Link>
+            <div className={styles.wishlist_heading}><h1>Aapki Wishlist</h1></div>
 
             {
                 wishlist.length === 0 ?
