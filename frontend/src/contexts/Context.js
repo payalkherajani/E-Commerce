@@ -10,7 +10,7 @@ const initialState = {
     error: '',
     loading: false,
     product: {},
-    sortBy: null,
+    sortBy: '',
 }
 
 export const Provider = ({ children }) => {

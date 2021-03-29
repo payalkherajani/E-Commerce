@@ -6,11 +6,13 @@ const Sidebar = () => {
     const { state: { sortBy }, dispatch } = useCustomContext();
 
     const handlePriceSorting = (e) => {
-        const { name } = e.target;
+        let { name, value } = e.target;
         if (name === 'ascending') {
-            dispatch({ type: PRICE_LOW_TO_HIGH, payload: PRICE_LOW_TO_HIGH })
+            value = PRICE_LOW_TO_HIGH
+            dispatch({ type: PRICE_LOW_TO_HIGH, payload: value })
         } else {
-            dispatch({ type: PRICE_HIGH_TO_LOW, payload: PRICE_HIGH_TO_LOW })
+            value = PRICE_HIGH_TO_LOW
+            dispatch({ type: PRICE_HIGH_TO_LOW, payload: value })
         }
     }
 
@@ -23,13 +25,13 @@ const Sidebar = () => {
             <ul className="sidebar-list-group">
                 <li className="sidebar-list-item gray" >
                     <label>
-                        <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} className="checkmark" value={PRICE_LOW_TO_HIGH} />
+                        <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} className="checkmark" value={sortBy} />
                          LOW TO HIGH
                     </label>
                 </li>
                 <li className="sidebar-list-item gray">
                     <label>
-                        <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} className="checkmark" value={PRICE_HIGH_TO_LOW} />
+                        <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} className="checkmark" value={sortBy} />
                         HIGH TO LOW
                     </label>
                 </li>
