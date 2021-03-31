@@ -3,7 +3,7 @@ import useCustomContext from '../../customHooks/Hook';
 import axios from 'axios';
 import { PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../../constants/ProductConstants';
 import { Loader, Sidebar, Message, Card, Searchbar } from '../../components';
-import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../../constants/FilterConstants';
+import { PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../../constants/FilterConstants';
 
 const Products = () => {
 
@@ -25,28 +25,23 @@ const Products = () => {
     }, []);
 
     const getSortedData = (state, data) => {
-        let sortedProducts = [...data]
+
+        let sortedProducts = [...data];
 
         if (state.sortBy === PRICE_HIGH_TO_LOW) {
             sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
-            return sortedProducts;
         }
-        else if (state.sortBy === PRICE_LOW_TO_HIGH) {
+        if (state.sortBy === PRICE_LOW_TO_HIGH) {
             sortedProducts = sortedProducts.sort((a, b) => a.price - b.price);
-            return sortedProducts;
         }
-        else if (state.sortBy === '') {
-            return sortedProducts;
-        }
-        else if (state.keyword !== '') {
-            console.log('I am here')
+        if (state.keyword) {
             sortedProducts = sortedProducts.filter((x) => x.name.toLowerCase().includes(state.keyword));
-            console.log({ sortedProducts })
-            return sortedProducts;
         }
-        else {
-            return sortedProducts;
+        if (state.sortBy === '' || state.keyword === '') {
+            sortedProducts = sortedProducts
         }
+
+        return sortedProducts;
     }
 
     const sortedProducts = getSortedData(state, products);

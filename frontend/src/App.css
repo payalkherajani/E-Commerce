@@ -16,11 +16,17 @@ a{
    text-transform: lowercase;
    font-family: cursive;
 }
-.navbar-list-item{
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    align-items: center;
+.badge-nav-cart{
+    position: absolute;
+    color: white;
+    top: -10px;
+    left: 42px;
+}
+.badge-nav-wishlist{
+    position: absolute;
+    color: white;
+    top: -10px;
+    left: 65px;
 }
 .navbar-fixed-top{
     position: fixed;

@@ -16,9 +16,8 @@ const Searchbar = () => {
 
     return (
         <div className="searchbar">
-            <input type="text" className="form-control width-half" placeholder="Search Product ..." onChange={handleSearch} />
+            <input type="text" className="form-control width-half" placeholder="Search Product ..." onChange={handleSearch} value={state.keyword} />
             <i className="fas fa-times search-icon" onClick={clearSearch}></i>
-
         </div>
     )
 }

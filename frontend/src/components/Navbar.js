@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import icon from '../assets/images/Hamburger_icon_white.svg';
 import { Link } from 'react-router-dom';
+import useCustomContext from '../customHooks/Hook';
 
 const Navbar = () => {
 
     const [visible, setVisible] = useState(false);
+    const { state } = useCustomContext()
 
     return (
         <nav className="nav nav-dark m-b-0 navbar-fixed-top p-0">
@@ -17,19 +19,21 @@ const Navbar = () => {
             <ul className={visible === true ? ("nav-list") : (" nav-list nav-list-none")}>
 
                 <Link to={{ pathname: '/products' }}>
-                    <li className="navbar-list-item" onClick={() => setVisible((visible) => !visible)}>
+                    <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
                         Products
                     </li>
                 </Link>
 
                 <Link to={{ pathname: '/wishlist' }}>
-                    <li className="navbar-list-item" onClick={() => setVisible((visible) => !visible)}>
+                    <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
                         WishList
+                        <span className="badge-nav-wishlist">{state.wishlist.length}</span>
                     </li>
                 </Link>
                 <Link to={{ pathname: '/cart' }}>
-                    <li className="navbar-list-item" onClick={() => setVisible((visible) => !visible)}>
+                    <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
                         Cart
+                        <span className="badge-nav-cart">{state.cart.length}</span>
                     </li>
                 </Link>
             </ul>

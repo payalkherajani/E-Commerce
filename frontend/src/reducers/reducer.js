@@ -63,7 +63,7 @@ export const reducer = (state, action) => {
             return { ...state, keyword: toSearch }
 
         case CLEAR_SEARCH:
-            return { ...state, keyword: '', products: state.products }
+            return { ...state, keyword: '' }
 
         default:
             return state
