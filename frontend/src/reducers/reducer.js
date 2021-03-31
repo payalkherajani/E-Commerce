@@ -50,21 +50,17 @@ export const reducer = (state, action) => {
             return { ...state, cart: updatedCartItemsQty }
 
         case PRICE_HIGH_TO_LOW:
-            const sortProductsdescending = state.products.sort((a, b) => b.price - a.price);
-            return { ...state, products: sortProductsdescending, sortBy: payload }
+            return { ...state, sortBy: payload }
 
         case PRICE_LOW_TO_HIGH:
-            const sortProductsascending = state.products.sort((a, b) => a.price - b.price)
-            return { ...state, products: sortProductsascending, sortBy: payload }
+            return { ...state, sortBy: payload }
 
         case CLEAR_ALL_FILTERS:
-            const sortbyid = state.products.sort((a, b) => a.id - b.id)
-            return { ...state, products: sortbyid, sortBy: '' }
+            return { ...state, sortBy: '' }
 
         case SEARCH_KEYWORD_REQUEST:
             const toSearch = payload.toLowerCase();
-            const isPresent = state.products.filter((x) => x.name.toLowerCase().includes(payload));
-            return { ...state, keyword: toSearch, products: isPresent }
+            return { ...state, keyword: toSearch }
 
         case CLEAR_SEARCH:
             return { ...state, keyword: '', products: state.products }

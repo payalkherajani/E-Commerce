@@ -3,7 +3,7 @@ import useCustomContext from '../../customHooks/Hook';
 import axios from 'axios';
 import { PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../../constants/ProductConstants';
 import { Loader, Sidebar, Message, Card, Searchbar } from '../../components';
-import { PRICE_HIGH_TO_LOW } from '../../constants/FilterConstants';
+import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../../constants/FilterConstants';
 
 const Products = () => {
 
@@ -24,13 +24,33 @@ const Products = () => {
         fetchProducts()
     }, []);
 
-    // const getSortedData = (state,data) => {
-    //   if(state.sortBy === PRICE_HIGH_TO_LOW){
-    //        return aaray
-    //   }
-    // }
+    const getSortedData = (state, data) => {
+        let sortedProducts = [...data]
 
-    // const sortedData = getSortedData(state,products);
+        if (state.sortBy === PRICE_HIGH_TO_LOW) {
+            sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
+            return sortedProducts;
+        }
+        else if (state.sortBy === PRICE_LOW_TO_HIGH) {
+            sortedProducts = sortedProducts.sort((a, b) => a.price - b.price);
+            return sortedProducts;
+        }
+        else if (state.sortBy === '') {
+            return sortedProducts;
+        }
+        else if (state.keyword !== '') {
+            console.log('I am here')
+            sortedProducts = sortedProducts.filter((x) => x.name.toLowerCase().includes(state.keyword));
+            console.log({ sortedProducts })
+            return sortedProducts;
+        }
+        else {
+            return sortedProducts;
+        }
+    }
+
+    const sortedProducts = getSortedData(state, products);
+
     return (
         <>
             <div className="container">
@@ -41,7 +61,7 @@ const Products = () => {
                         loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                             <ul className="d-flex wrap">
                                 {
-                                    products.map((product) => (
+                                    sortedProducts.map((product) => (
                                         <Fragment key={product.id} >
                                             <Card product={product} />
                                         </Fragment>
