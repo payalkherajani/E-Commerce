@@ -4,7 +4,8 @@
   "description": "Web App",
   "main": "server.js",
   "scripts": {
-    "client": "npm start --prefix frontend"
+    "client": "npm start --prefix frontend",
+    "build-ui": "cd frontend && npm run build"
   },
   "repository": {
     "type": "git",
