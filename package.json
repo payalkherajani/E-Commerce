@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "client": "npm start --prefix frontend",
-    "build-ui": "cd frontend && npm run build"
+    "build": "cd frontend && npm run build"
   },
   "repository": {
     "type": "git",
