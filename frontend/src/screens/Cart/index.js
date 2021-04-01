@@ -18,8 +18,6 @@ const Cart = () => {
         dispatch({ type: ADD_ITEM_TO_CART, payload: { newQty, id } })
     }
 
-    console.log({ cart })
-
     return (
         <div className={styles.cart_container}>
             <Link to='/products' className="p-half"><button className="btn btn-primary m-b-half">Go Back</button></Link>
