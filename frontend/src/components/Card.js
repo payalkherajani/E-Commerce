@@ -25,7 +25,7 @@ const Card = ({ product }) => {
             </div>
 
             <div className="product-text-container">
-                <div className="d-flex flex-direction-column m-l-1 flex-grow-1" >
+                <div className="display-flex flex-direction-column margin-left-1 flex-grow-1" >
                     <strong className="color-primary">{name}</strong>
                     <h3>₹{price}</h3>
                     <Rating value={rating} numReviews={`${numReviews}`} />

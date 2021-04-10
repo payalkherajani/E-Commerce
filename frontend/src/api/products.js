@@ -8,7 +8,7 @@ const products = [
         category: 'Electronics',
         price: 30000,
         countInStock: 10,
-        rating: 4.5,
+        rating: 4,
         numReviews: 12,
         qty: 0,
 
@@ -22,7 +22,7 @@ const products = [
         category: 'Trekking',
         price: 1400,
         countInStock: 7,
-        rating: 4.0,
+        rating: 4,
         numReviews: 8,
         qty: 0
     },
@@ -61,7 +61,7 @@ const products = [
         category: 'Bags',
         price: 1000,
         countInStock: 7,
-        rating: 3.5,
+        rating: 3,
         numReviews: 10,
         qty: 0
     },

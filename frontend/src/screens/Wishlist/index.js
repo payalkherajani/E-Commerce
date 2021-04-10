@@ -25,7 +25,7 @@ const WishList = () => {
 
     return (
         <div className={styles.wishlist_container}>
-            <Link to='/products' className="p-half"><button className="btn btn-primary m-b-half">Go Back</button></Link>
+            <Link to='/products' className="padding-half"><button className="btn btn-primary margin-bottom-half">Go Back</button></Link>
             <div className={styles.wishlist_heading}><h1>Aapki Wishlist</h1></div>
 
             {
@@ -51,9 +51,9 @@ const WishList = () => {
                                                 <li className={styles.list_item}>
                                                     <select value={qty} onChange={(e) => setQty((qty) => Number(e.target.value))} className="select-css">
                                                         {
-                                                            [...Array(item.countInStock).keys()].map((x) => (
-                                                                <option key={x} value={x + 1}>
-                                                                    { x + 1}
+                                                            [...Array(item.countInStock).keys()].map((count) => (
+                                                                <option key={count} value={count + 1}>
+                                                                    { count + 1}
                                                                 </option>
                                                             ))
                                                         }

@@ -54,7 +54,7 @@ a{
 }
 
 
-.d-flex{
+.display-flex{
     display: flex;
     gap: 1rem;
 }
@@ -135,7 +135,7 @@ input[type=radio]:checked {
     .product-card{
         padding: 1rem;
     }
-    .m-l-1{
+    .margin-left-1{
         margin-left: 1rem;
        }
        .product-card-footer{
@@ -159,10 +159,10 @@ input[type=radio]:checked {
       border: none;
   }
   
-  .m-b-half{
+  .margin-bottom-half{
       margin-bottom: 0.5rem;
   }
-  .p-half{
+  .padding-half{
    padding: 0.5rem;
   }
   .select-css{

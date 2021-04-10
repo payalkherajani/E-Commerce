@@ -20,7 +20,7 @@ const Cart = () => {
 
     return (
         <div className={styles.cart_container}>
-            <Link to='/products' className="p-half"><button className="btn btn-primary m-b-half">Go Back</button></Link>
+            <Link to='/products' className="padding-half"><button className="btn btn-primary margin-bottom-half">Go Back</button></Link>
             <div className={styles.cart_heading}><h1>Aapka Cart</h1></div>
             {
                 cart.length === 0 ?
@@ -44,9 +44,9 @@ const Cart = () => {
                                                 <li className={styles.list_item}>
                                                     <select value={qty} onChange={(e) => addIteminCart(e, id)} className="select-css">
                                                         {
-                                                            [...Array(countInStock).keys()].map((x) => (
-                                                                <option key={x} value={x + 1}>
-                                                                    { x + 1}
+                                                            [...Array(countInStock).keys()].map((count) => (
+                                                                <option key={count} value={count + 1}>
+                                                                    { count + 1}
                                                                 </option>
                                                             ))
                                                         }
@@ -68,28 +68,3 @@ const Cart = () => {
 }
 
 export default Cart;
-
-
-
-{/* <ul>
-                {
-                    cart.map((item) => (
-                        <Fragment key={item.id}>
-                            <li>{item.name}</li>
-                            <li>{item.price}</li>
-                            <li><button onClick={() => removefromcart(item.id)}>Delete</button></li>
-                            <li>
-                                <select value={item.qty} onChange={(e) => addIteminCart(e, item.id)}>
-                                    {
-                                        [...Array(item.countInStock).keys()].map((x) => (
-                                            <option key={x} value={x + 1}>
-                                                { x + 1}
-                                            </option>
-                                        ))
-                                    }
-                                </select>
-                            </li>
-                        </Fragment>
-                    ))
-                }
-            </ul> */}

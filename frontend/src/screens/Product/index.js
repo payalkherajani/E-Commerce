@@ -50,11 +50,11 @@ const Products = () => {
         <>
             <div className="container">
                 <Sidebar />
-                <div className="main m-0 m-l-1">
+                <div className="main m-0 margin-left-1">
                     <Searchbar />
                     {
                         loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                            <ul className="d-flex wrap">
+                            <ul className="display-flex wrap">
                                 {
                                     sortedProducts.map((product) => (
                                         <Fragment key={product.id} >
