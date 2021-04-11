@@ -21,6 +21,7 @@ Things left-do-to
 * Make it completely responsive
 * Add some more filters (Include out of stock and fast delivery) and brands filters too.
 * Designing of Landing Page
+* Auth
 
 How to run ?
 >In Root directory 
