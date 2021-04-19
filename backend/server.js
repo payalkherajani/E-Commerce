@@ -4,6 +4,7 @@ require('dotenv').config();
 const userRoutes = require('./routes/user.route');
 
 const app = express();
+app.use(express.json()); //to accept req.body
 
 connectDB()
 
