@@ -8,8 +8,8 @@ const registerUser = async (req, res) => {
     try {
         const { name, email, password, is_active } = req.body;
 
-        if (!name || !email || !password || is_active) {
-            return res.status(400).json({ success: false, message: "Name, Email, Password and active are required parameters" })
+        if (!email || !password) {
+            return res.status(400).json({ success: false, message: "Email and Password are required parameters" })
         }
 
         const userExists = await User.findOne({ email })
