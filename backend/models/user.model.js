@@ -21,7 +21,7 @@ const userSchema = new Schema({
 
     is_active: {
         type: Boolean,
-        default: 1
+        default: true
     }
 
 },
