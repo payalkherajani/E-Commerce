@@ -71,6 +71,15 @@ const loginUser = async (req, res) => {
     }
 }
 
+const getUserByID = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await User.findOne({ _id: id });
+        res.status(200).send(user)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: "Server Error" })
+    }
+}
 
-
-module.exports = { registerUser, loginUser }
+module.exports = { registerUser, loginUser, getUserByID }
