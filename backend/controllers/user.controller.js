@@ -62,7 +62,7 @@ const loginUser = async (req, res) => {
 
         const token = generateToken(userExists._id);
 
-        return res.status(200).json({ token });
+        return res.status(200).json({ user: token });
 
     } catch (err) {
         console.log(err);
@@ -71,10 +71,17 @@ const loginUser = async (req, res) => {
     }
 }
 
+// @desc    Get User By ID
+// @route   POST /api/users/:id
+// @access  Public
+
 const getUserByID = async (req, res) => {
     try {
         const { id } = req.params
         const user = await User.findOne({ _id: id });
+        if (!user) {
+            return res.status(400).json({ success: false, message: 'No user Found with this ID ' })
+        }
         res.status(200).send(user)
     } catch (err) {
         console.log(err);
