@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const generateToken = require('../utlis/generateToken');
 const Cart = require('../models/cart.model');
-
+const Wishlist = require('../models/wishlist.model');
 
 // @desc    Register User
 // @route   POST /api/users/register
@@ -33,11 +33,19 @@ const registerUser = async (req, res) => {
 
         const registeredUser = await newUser.save();
 
+        //cart created for user
         const cart = new Cart({
             user: registeredUser._id,
             productsinCart: []
         })
 
+        //wishlist created for user
+        const wishlist = new Wishlist({
+            user: registeredUser._id,
+            productsinWishlist: []
+        })
+
+        await wishlist.save();
         await cart.save();
 
         res.status(200).json({ success: true, message: "Registration successfull" })

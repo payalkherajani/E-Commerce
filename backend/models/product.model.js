@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 
 const productSchema = new Schema(
     {
+        category: {
+            type: Schema.Types.ObjectId,
+            ref: 'category'
+        },
         name: {
             type: String
         },
