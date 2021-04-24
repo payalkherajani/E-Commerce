@@ -5,6 +5,7 @@ require('dotenv').config();
 const routeNotFound = require('./middleware/route-not-found.middleware');
 const userRoutes = require('./routes/user.route');
 const productRoutes = require('./routes/product.route');
+const cartRoutes = require('./routes/cart.route');
 
 const app = express();
 app.use(express.json()); //to accept req.body
@@ -14,6 +15,7 @@ connectDB()
 //routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/carts', cartRoutes);
 
 //This should not be moved
 app.use(routeNotFound);

@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const generateToken = require('../utlis/generateToken');
+const Cart = require('../models/cart.model');
 
 
 // @desc    Register User
@@ -30,7 +31,15 @@ const registerUser = async (req, res) => {
             is_active
         })
 
-        await newUser.save();
+        const registeredUser = await newUser.save();
+
+        const cart = new Cart({
+            user: registeredUser._id,
+            productsinCart: []
+        })
+
+        await cart.save();
+
         res.status(200).json({ success: true, message: "Registration successfull" })
     } catch (err) {
         console.log(err);
