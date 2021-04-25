@@ -3,13 +3,18 @@ const User = require('../models/user.model');
 const Product = require('../models/product.model');
 
 
-// @desc    Get All Products in Cart by USERID
+// @desc    Get Cart by USERID
 // @route   GET /api/carts/:id
 // @access  Public
 
-const getAllProductsinCartByUserID = async (req, res) => {
+const getCartByUserID = async (req, res) => {
     try {
-        res.send("Working")
+        const { id } = req.params;
+        const findCart = await Cart.findOne({ user: id });
+        if (!findCart) {
+            return res.status(400).json({ success: false, message: "Cart not Found" })
+        }
+        res.status(200).send(findCart);
     } catch (err) {
         console.log(err);
         res.status(500).json({ success: false, message: "Server Error" });
@@ -23,13 +28,9 @@ const getAllProductsinCartByUserID = async (req, res) => {
 const addIteminCart = async (req, res) => {
     try {
 
-        const { user, productId, quantity } = req.body;
+        const { id } = req.params; //cartID
 
-        //validate User
-        const isUser = await User.findOne({ _id: user })
-        if (!isUser) {
-            return res.status(400).json({ success: false, message: "InValid User" })
-        }
+        const { productId, quantity } = req.body;
 
         //valid ProductID
         const isProductIDValid = await Product.findOne({ _id: productId });
@@ -38,18 +39,16 @@ const addIteminCart = async (req, res) => {
             return res.status(400).json({ success: false, message: "InValid Product" })
         }
 
-        const products = [{ productId, quantity }]
+        const cart = await Cart.findOne({ _id: id });
 
+        const productToBeAdded = {
+            productId,
+            quantity
+        }
 
-        //First product added to cart, so Cart for user is created here!
-        const newCartItem = new Cart({
-            user,
-            productsinCart: products
-        })
+        const products = [...cart.productsinCart, productToBeAdded]
 
-        const savedIteminCart = await newCartItem.save();
-
-        res.status(200).send(savedIteminCart)
+        res.status(200).send("Valid user and product")
 
     } catch (err) {
         console.log(err);
@@ -58,7 +57,7 @@ const addIteminCart = async (req, res) => {
 }
 
 
-// @desc    Update Product in cart
+// @desc    Update Qunatity of Product in cart
 // @route   POST /api/carts/:id
 // @access  Public
 
@@ -73,4 +72,4 @@ const updateIteminCart = async (req, res) => {
 }
 
 
-module.exports = { getAllProductsinCartByUserID, addIteminCart, updateIteminCart }
+module.exports = { getCartByUserID, addIteminCart, updateIteminCart }
