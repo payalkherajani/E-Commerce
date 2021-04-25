@@ -100,5 +100,37 @@ const updateIteminCart = async (req, res) => {
     }
 }
 
+// @desc    Remove Product
+// @route   DELETE /api/carts/:id/:productId
+// @access  Public
 
-module.exports = { getCartByUserID, addIteminCart, updateIteminCart }
+const deleteProductFromCart = async (req, res) => {
+    try {
+
+        const { cartId, productId } = req.params;
+
+        const cart = await Cart.findOne({ _id: cartId })
+
+        const { productsinCart } = cart;
+
+        const products = productsinCart.filter((p) => {
+            return p.productId != productId
+        })
+
+
+        const updatedDetails = {
+            user: cart.user,
+            productsinCart: products
+        }
+
+        const updatedCart = await Cart.findOneAndUpdate({ _id: cartId }, { $set: updatedDetails }, { new: true });
+
+        res.status(200).send(updatedCart);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+}
+
+
+module.exports = { getCartByUserID, addIteminCart, updateIteminCart, deleteProductFromCart }
