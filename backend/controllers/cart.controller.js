@@ -1,5 +1,5 @@
 const Cart = require('../models/cart.model');
-const User = require('../models/user.model');
+// const User = require('../models/user.model');
 const Product = require('../models/product.model');
 
 
@@ -10,7 +10,16 @@ const Product = require('../models/product.model');
 const getCartByUserID = async (req, res) => {
     try {
         const { id } = req.params;
-        const findCart = await Cart.findOne({ user: id });
+        const findCart = await Cart.findOne({ user: id }).populate('productsinCart.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category'
+        ]);
         if (!findCart) {
             return res.status(400).json({ success: false, message: "Cart not Found" })
         }

@@ -9,7 +9,16 @@ const Product = require('../models/product.model');
 const getWishlistByUserID = async (req, res) => {
     try {
         const { id } = req.params;
-        const findwishlist = await Wishlist.findOne({ user: id });
+        const findwishlist = await Wishlist.findOne({ user: id }).populate('productsinWishlist.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category'
+        ]);;
         if (!findwishlist) {
             return res.status(400).json({ success: false, message: "Wishlist not Found" })
         }
