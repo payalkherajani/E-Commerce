@@ -48,7 +48,14 @@ const addIteminCart = async (req, res) => {
 
         const products = [...cart.productsinCart, productToBeAdded]
 
-        res.status(200).send("Valid user and product")
+        const updatedDetails = {
+            user: cart.user,
+            productsinCart: products
+        }
+
+        const updatedCart = await Cart.findOneAndUpdate({ _id: id }, { $set: updatedDetails }, { new: true })
+
+        res.status(200).send(updatedCart)
 
     } catch (err) {
         console.log(err);
@@ -64,7 +71,29 @@ const addIteminCart = async (req, res) => {
 const updateIteminCart = async (req, res) => {
     try {
 
-        res.send("working");
+        const { cartId, productId } = req.params
+        const { quantity } = req.body;
+
+        const cart = await Cart.findOne({ _id: cartId });
+
+        const { productsinCart } = cart;
+
+        const updatedQuantity = productsinCart.map((product) => {
+            if (product.productId == productId) {
+                product.quantity = quantity;
+            }
+            return product
+        })
+
+        const updatedDetails = {
+            user: cart.user,
+            productsinCart: updatedQuantity
+        }
+
+        const updatedProductsQunatityinCart = await Cart.findOneAndUpdate({ _id: cartId }, { $set: updatedDetails }, { new: true })
+
+        return res.status(200).send(updatedProductsQunatityinCart);
+
     } catch (err) {
         console.log(err);
         res.status(500).json({ success: false, message: "Server Error" });

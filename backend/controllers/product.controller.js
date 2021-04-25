@@ -21,7 +21,7 @@ const getAllProducts = async (req, res) => {
 const addProduct = async (req, res) => {
     try {
 
-        const { name, image, description, price, countInStock, rating, numReviews, qty } = req.body;
+        const { name, image, description, price, countInStock, rating, numReviews, qty, category } = req.body;
 
         const productDetails = new Product({
             name,
@@ -31,7 +31,8 @@ const addProduct = async (req, res) => {
             countInStock,
             rating,
             numReviews,
-            qty
+            qty,
+            category
         })
 
         const savedProduct = await productDetails.save();
@@ -79,7 +80,7 @@ const updateProductDetails = async (req, res) => {
             return res.status(400).json({ success: false, message: 'No Product Found with this ID' })
         }
 
-        const { name, image, description, price, countInStock, rating, numReviews, qty } = req.body;
+        const { name, image, description, price, countInStock, rating, numReviews, qty, category } = req.body;
 
         const newDetails = {
             name,
@@ -89,7 +90,8 @@ const updateProductDetails = async (req, res) => {
             countInStock,
             rating,
             numReviews,
-            qty
+            qty,
+            category
         }
 
         productexists = await Product.findOneAndUpdate({ _id: id }, { $set: newDetails }, { new: true })
