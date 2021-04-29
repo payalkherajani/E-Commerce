@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './register.module.css';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Config from '../../config/Config'
 import { ToastContainer, toast } from 'react-toastify';
@@ -68,66 +68,68 @@ const Register = () => {
 
 
     return (
-        <div className={styles.login__container}>
-            <h1>Register</h1>
-            <form onSubmit={onFormSubmit} className={styles.form}>
-                <div className={styles.form_container}>
-                    <input
-                        className={styles.input_login}
-                        placeholder="Name"
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={handleFormData}
-                    />
-                </div>
+        localStorage.getItem('TOKEN') ? (<Redirect to="/products" />) : (
+            <div className={styles.login__container}>
+                <h1>Register</h1>
+                <form onSubmit={onFormSubmit} className={styles.form}>
+                    <div className={styles.form_container}>
+                        <input
+                            className={styles.input_login}
+                            placeholder="Name"
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={handleFormData}
+                        />
+                    </div>
 
-                <div className={styles.form_container}>
-                    <input
-                        className={styles.input_login}
-                        placeholder="Email"
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleFormData}
-                    />
-                </div>
+                    <div className={styles.form_container}>
+                        <input
+                            className={styles.input_login}
+                            placeholder="Email"
+                            type="email"
+                            name="email"
+                            value={email}
+                            onChange={handleFormData}
+                        />
+                    </div>
 
-                <div className={styles.form_container}>
-                    <input
-                        className={styles.input_login}
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleFormData}
-                    />
-                </div>
+                    <div className={styles.form_container}>
+                        <input
+                            className={styles.input_login}
+                            placeholder="Password"
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={handleFormData}
+                        />
+                    </div>
 
-                <div className={styles.form_container}>
-                    <input
-                        className={styles.input_login}
-                        placeholder="Confirm Password"
-                        type="password"
-                        name="confirmpassword"
-                        value={confirmpassword}
-                        onChange={handleFormData}
+                    <div className={styles.form_container}>
+                        <input
+                            className={styles.input_login}
+                            placeholder="Confirm Password"
+                            type="password"
+                            name="confirmpassword"
+                            value={confirmpassword}
+                            onChange={handleFormData}
+                        />
+                    </div>
+                    <button className={`btn btn-primary ${styles.login_button}`}>Register</button>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
                     />
-                </div>
-                <button className={`btn btn-primary ${styles.login_button}`}>Register</button>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-            </form>
-        </div>
+                </form>
+            </div>
+        )
     )
 }
 

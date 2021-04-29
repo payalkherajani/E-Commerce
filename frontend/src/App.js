@@ -5,7 +5,9 @@ import { Products, SingleProduct, WishList, Landing, Cart, Register, Login } fro
 import { Navbar } from './components';
 import PrivateRoute from './routes/Privateroute';
 
+
 const App = () => {
+
   return (
     <div className="app">
       <Router>
