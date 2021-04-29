@@ -6,10 +6,11 @@ import useCustomContext from '../../customHooks/Hook'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { USER_LOGGED_IN } from '../../constants/type';
+import { useHistory } from 'react-router-dom';
 const { serverUrl } = Config;
 
 const Login = () => {
-
+    const history = useHistory()
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -29,6 +30,7 @@ const Login = () => {
         try {
             const { data } = await axios.post(`${serverUrl}/api/users/login`, formData);
             dispatch({ type: USER_LOGGED_IN, payload: data.user })
+            history.push("/products");
         } catch (err) {
             const error = err.response.data.message;
             toast.error(`${error}`, {
@@ -50,7 +52,7 @@ const Login = () => {
     return (
         <div className={styles.login__container}>
             <h1>Login</h1>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} className={styles.form}>
                 <div className={styles.form_container}>
                     <input
                         className={styles.input_login}

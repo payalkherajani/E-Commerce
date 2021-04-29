@@ -21,3 +21,15 @@
       width: 100%;
       margin-bottom: 1rem;
   }
+
+  @media only screen and (min-width:768px){
+    .login__container{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+     }
+     .form{
+       width: 60%;
+     }
+  }

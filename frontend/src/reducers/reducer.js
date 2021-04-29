@@ -67,6 +67,7 @@ export const reducer = (state, action) => {
             return { ...state, keyword: '' }
 
         case USER_LOGGED_IN:
+            localStorage.setItem('TOKEN', payload);
             return { ...state, user: payload }
 
         default:
