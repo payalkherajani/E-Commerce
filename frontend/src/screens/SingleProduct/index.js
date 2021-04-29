@@ -6,6 +6,8 @@ import { ADD_TO_CART } from '../../constants/CartConstants';
 import { Loader, Message, Rating } from '../../components'
 import style from './singleproduct.module.css';
 import { Link } from 'react-router-dom';
+import Config from '../../config/Config';
+const { serverUrl } = Config;
 
 
 const SingleProduct = ({ match: { params: { id } } }) => {
@@ -17,8 +19,8 @@ const SingleProduct = ({ match: { params: { id } } }) => {
     const fetchSingleProductDetails = async () => {
         try {
             dispatch({ type: PRODUCTS_DETAILS_REQUEST });
-            const { data } = await axios.get(`/api/product/${id}`);
-            dispatch({ type: PRODUCTS_DETAILS_SUCCESS, payload: data.products })
+            const { data } = await axios.get(`${serverUrl}/api/products/${id}`);
+            dispatch({ type: PRODUCTS_DETAILS_SUCCESS, payload: data })
         } catch (err) {
             dispatch({ type: PRODUCTS_DETAILS_FAILURE, payload: 'Something went wrong' })
         }
@@ -56,7 +58,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                                 <li className={style.list_item}><strong>{name}</strong></li>
                                 <li className={style.list_item}>{description}</li>
                                 <li className={style.list_item}>{countInStock > 0 ? 'In Stock' : 'Out of Stock'}</li>
-                                <li className={style.list_item}><Rating value={rating} numReviews={`${numReviews}`} /></li>
+                                {/* <li className={style.list_item}><Rating value={rating} numReviews={`${numReviews}`} /></li> */}
                                 <li className={style.list_item}>
                                     <select value={qty} onChange={(e) => setQty((qty) => Number(e.target.value))} className="select-css">
                                         {
