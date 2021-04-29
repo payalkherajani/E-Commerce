@@ -72,6 +72,7 @@ const addIteminwishlist = async (req, res) => {
 }
 
 
+//I think , I dont need this api in wishlist
 // @desc    Update Qunatity of Product in wishlist
 // @route   POST /api/wishlists/:id
 // @access  Public
@@ -85,6 +86,7 @@ const updateIteminwishlist = async (req, res) => {
         const wishlist = await Wishlist.findOne({ _id: wishlistId });
 
         const { productsinWishlist } = wishlist;
+
 
         const updatedQuantity = productsinWishlist.map((product) => {
             if (product.productId == productId) {
