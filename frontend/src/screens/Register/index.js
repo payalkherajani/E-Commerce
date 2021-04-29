@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './register.module.css';
 
 const Register = () => {
@@ -32,6 +32,16 @@ const Register = () => {
                         placeholder="Password"
                         type="password"
                         name="password"
+
+                    />
+                </div>
+
+                <div className={styles.form_container}>
+                    <input
+                        className={styles.input_login}
+                        placeholder="Confirm Password"
+                        type="password"
+                        name="confirmpassword"
 
                     />
                 </div>
