@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './login.module.css';
 import axios from 'axios';
 import Config from '../../config/Config';
@@ -6,7 +6,7 @@ import useCustomContext from '../../customHooks/Hook'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { USER_LOGGED_IN } from '../../constants/type';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 const { serverUrl } = Config;
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
         password: ''
     })
 
-    const { state, dispatch } = useCustomContext();
+    const { dispatch } = useCustomContext();
 
     const { password, email } = formData;
 
@@ -49,47 +49,53 @@ const Login = () => {
 
     }
 
+
     return (
-        <div className={styles.login__container}>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin} className={styles.form}>
-                <div className={styles.form_container}>
-                    <input
-                        className={styles.input_login}
-                        placeholder="Email"
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleFormData}
-                    />
+        localStorage.getItem('TOKEN') ?
+            (<Redirect to="/products" />) :
+
+            (
+                <div className={styles.login__container}>
+                    <h1>Login</h1>
+                    <form onSubmit={handleLogin} className={styles.form}>
+                        <div className={styles.form_container}>
+                            <input
+                                className={styles.input_login}
+                                placeholder="Email"
+                                type="email"
+                                name="email"
+                                value={email}
+                                onChange={handleFormData}
+                            />
+                        </div>
+
+                        <div className={styles.form_container}>
+                            <input
+                                className={styles.input_login}
+                                placeholder="Password"
+                                type="password"
+                                name="password"
+                                value={password}
+                                onChange={handleFormData}
+                            />
+                        </div>
+                        <button className={`btn btn-primary ${styles.login_button}`}>Login</button>
+
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+
+                    </form>
                 </div>
-
-                <div className={styles.form_container}>
-                    <input
-                        className={styles.input_login}
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleFormData}
-                    />
-                </div>
-                <button className={`btn btn-primary ${styles.login_button}`}>Login</button>
-
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-
-            </form>
-        </div>
+            )
     )
 }
 export default Login;

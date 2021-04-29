@@ -12,7 +12,7 @@ const initialState = {
     product: {},
     sortBy: '',
     keyword: '',
-    user: {}
+    user: {},
 }
 
 export const Provider = ({ children }) => {

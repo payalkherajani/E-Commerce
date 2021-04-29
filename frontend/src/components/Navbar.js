@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import icon from '../assets/images/Hamburger_icon_white.svg';
 import { Link } from 'react-router-dom';
 import useCustomContext from '../customHooks/Hook';
+import { USER_LOGOUT } from '../constants/type';
 
 const Navbar = () => {
 
     const [visible, setVisible] = useState(false);
-    const { state } = useCustomContext()
+    const { state, dispatch } = useCustomContext()
 
     return (
         <nav className="nav nav-dark m-b-0 navbar-fixed-top p-0">
@@ -40,9 +41,9 @@ const Navbar = () => {
                         <Link to={{ pathname: '/' }}>
                             <li className="badge-relative" onClick={() => {
                                 setVisible((visible) => !visible)
-                                localStorage.removeItem('TOKEN')
+                                dispatch({ type: USER_LOGOUT })
                             }}>
-                                <i class="fas fa-sign-out-alt"></i>
+                                <i className="fas fa-sign-out-alt"></i>
                             </li>
                         </Link>
 
