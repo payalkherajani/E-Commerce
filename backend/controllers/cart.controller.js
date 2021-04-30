@@ -1,5 +1,4 @@
 const Cart = require('../models/cart.model');
-// const User = require('../models/user.model');
 const Product = require('../models/product.model');
 
 
@@ -9,8 +8,8 @@ const Product = require('../models/product.model');
 
 const getCartByUserID = async (req, res) => {
     try {
-        const { id } = req.params;
-        const findCart = await Cart.findOne({ user: id }).populate('productsinCart.productId', [
+        const userId = req.user
+        const findCart = await Cart.findOne({ user: userId }).populate('productsinCart.productId', [
             'name',
             'price',
             'description',
@@ -37,7 +36,7 @@ const getCartByUserID = async (req, res) => {
 const addIteminCart = async (req, res) => {
     try {
 
-        const { id } = req.params; //cartID
+        const userId = req.user;
 
         const { productId, quantity } = req.body;
 
@@ -48,7 +47,13 @@ const addIteminCart = async (req, res) => {
             return res.status(400).json({ success: false, message: "InValid Product" })
         }
 
-        const cart = await Cart.findOne({ _id: id });
+        const cart = await Cart.findOne({ user: userId });
+
+        const isProductPresent = !!cart.productsinCart.find((p) => p.productId == productId)
+
+        if (isProductPresent) {
+            return res.status(200).send({ success: false, message: 'Product is Present in cart' })
+        }
 
         const productToBeAdded = {
             productId,
@@ -62,7 +67,7 @@ const addIteminCart = async (req, res) => {
             productsinCart: products
         }
 
-        const updatedCart = await Cart.findOneAndUpdate({ _id: id }, { $set: updatedDetails }, { new: true })
+        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true })
 
         res.status(200).send(updatedCart)
 
@@ -80,10 +85,11 @@ const addIteminCart = async (req, res) => {
 const updateIteminCart = async (req, res) => {
     try {
 
-        const { cartId, productId } = req.params
+        const { productId } = req.params
         const { quantity } = req.body;
+        const userId = req.user;
 
-        const cart = await Cart.findOne({ _id: cartId });
+        const cart = await Cart.findOne({ user: userId });
 
         const { productsinCart } = cart;
 
@@ -99,7 +105,7 @@ const updateIteminCart = async (req, res) => {
             productsinCart: updatedQuantity
         }
 
-        const updatedProductsQunatityinCart = await Cart.findOneAndUpdate({ _id: cartId }, { $set: updatedDetails }, { new: true })
+        const updatedProductsQunatityinCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true })
 
         return res.status(200).send(updatedProductsQunatityinCart);
 
@@ -116,9 +122,10 @@ const updateIteminCart = async (req, res) => {
 const deleteProductFromCart = async (req, res) => {
     try {
 
-        const { cartId, productId } = req.params;
+        const { productId } = req.params;
+        const userId = req.user;
 
-        const cart = await Cart.findOne({ _id: cartId })
+        const cart = await Cart.findOne({ user: userId })
 
         const { productsinCart } = cart;
 
@@ -132,7 +139,7 @@ const deleteProductFromCart = async (req, res) => {
             productsinCart: products
         }
 
-        const updatedCart = await Cart.findOneAndUpdate({ _id: cartId }, { $set: updatedDetails }, { new: true });
+        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true });
 
         res.status(200).send(updatedCart);
     } catch (err) {

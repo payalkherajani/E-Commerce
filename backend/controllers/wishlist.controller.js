@@ -100,7 +100,7 @@ const deleteProductFromwishlist = async (req, res) => {
             productsinWishlist: products
         }
 
-        const updatedwishlist = await Wishlist.findOneAndUpdate({ _id: wishlistId }, { $set: updatedDetails }, { new: true });
+        const updatedwishlist = await Wishlist.findOneAndUpdate({ _id: wishlist._id }, { $set: updatedDetails }, { new: true });
 
         res.status(200).send(updatedwishlist);
     } catch (err) {

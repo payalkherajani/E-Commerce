@@ -21,9 +21,9 @@ connectDB()
 
 //routes
 app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/carts', cartRoutes);
-app.use('/api/categories', categoryRoutes);
+app.use('/api/products', auth, productRoutes);
+app.use('/api/carts', auth, cartRoutes);
+app.use('/api/categories', auth, categoryRoutes);
 app.use('/api/wishlists', auth, wishlistRoutes);
 
 //This should not be moved
