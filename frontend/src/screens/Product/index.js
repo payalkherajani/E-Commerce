@@ -27,6 +27,17 @@ const Products = () => {
     }, []);
 
 
+    // const fetchProductsinWishlist = async() => {
+    //   try {
+    //       const productsinWishlist = await axios.get(`${serverUrl}/`)
+    //   } catch (err) {
+    //       console.log(err);
+    //   }
+    // }
+
+    // useEffect(() => {
+    //   fetchProductsinWishlist()
+    // },[])
 
     const getSortedData = (state, products) => {
 
@@ -70,6 +81,7 @@ const Products = () => {
                         )
                     }
                 </div>
+
             </div>
         </>
 

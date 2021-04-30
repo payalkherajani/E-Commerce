@@ -1,15 +1,15 @@
 const Wishlist = require('../models/wishlist.model');
 const Product = require('../models/product.model');
 
-
 // @desc    Get wishlist by USERID
 // @route   GET /api/wishlists/:id
 // @access  Public
 
 const getWishlistByUserID = async (req, res) => {
     try {
-        const { id } = req.params;
-        const findwishlist = await Wishlist.findOne({ user: id }).populate('productsinWishlist.productId', [
+
+        const userId = req.user;
+        const findwishlist = await Wishlist.findOne({ user: userId }).populate('productsinWishlist.productId', [
             'name',
             'price',
             'description',
@@ -49,6 +49,12 @@ const addIteminwishlist = async (req, res) => {
 
         const wishlist = await Wishlist.findOne({ _id: id });
 
+        const isProductPresent = !!wishlist.productsinWishlist.find((p) => p.productId == productId)
+
+        if (isProductPresent) {
+            return res.status(200).send({ success: false, message: 'Product is Present in wishlist' })
+        }
+
         const productToBeAdded = {
             productId,
             quantity
@@ -71,45 +77,6 @@ const addIteminwishlist = async (req, res) => {
     }
 }
 
-
-//I think , I dont need this api in wishlist
-// @desc    Update Qunatity of Product in wishlist
-// @route   POST /api/wishlists/:id
-// @access  Public
-
-const updateIteminwishlist = async (req, res) => {
-    try {
-
-        const { wishlistId, productId } = req.params
-        const { quantity } = req.body;
-
-        const wishlist = await Wishlist.findOne({ _id: wishlistId });
-
-        const { productsinWishlist } = wishlist;
-
-
-        const updatedQuantity = productsinWishlist.map((product) => {
-            if (product.productId == productId) {
-                product.quantity = quantity;
-            }
-            return product
-        })
-
-        const updatedDetails = {
-            user: wishlist.user,
-            productsinWishlist: updatedQuantity
-        }
-
-        const updatedProductsQunatityinwishlist = await Wishlist.findOneAndUpdate({ _id: wishlistId }, { $set: updatedDetails }, { new: true })
-
-        return res.status(200).send(updatedProductsQunatityinwishlist);
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
-}
-
 // @desc    Remove Product
 // @route   DELETE /api/wishlists/:id/:productId
 // @access  Public
@@ -117,9 +84,10 @@ const updateIteminwishlist = async (req, res) => {
 const deleteProductFromwishlist = async (req, res) => {
     try {
 
-        const { wishlistId, productId } = req.params;
+        const { productId } = req.params;
+        const userId = req.user;
 
-        const wishlist = await Wishlist.findOne({ _id: wishlistId })
+        const wishlist = await Wishlist.findOne({ user: userId })
 
         const { productsinWishlist } = wishlist;
 
@@ -127,9 +95,8 @@ const deleteProductFromwishlist = async (req, res) => {
             return p.productId != productId
         })
 
-
         const updatedDetails = {
-            user: wishlist.user,
+            user: userId,
             productsinWishlist: products
         }
 
@@ -143,4 +110,4 @@ const deleteProductFromwishlist = async (req, res) => {
 }
 
 
-module.exports = { getWishlistByUserID, addIteminwishlist, updateIteminwishlist, deleteProductFromwishlist }
+module.exports = { getWishlistByUserID, addIteminwishlist, deleteProductFromwishlist }

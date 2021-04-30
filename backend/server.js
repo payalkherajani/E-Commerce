@@ -9,6 +9,7 @@ const productRoutes = require('./routes/product.route');
 const cartRoutes = require('./routes/cart.route');
 const categoryRoutes = require('./routes/category.route');
 const wishlistRoutes = require('./routes/wishlist.route');
+const auth = require('./middleware/auth.middleware');
 
 const app = express();
 app.use(express.json()); //to accept req.body
@@ -23,7 +24,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/api/categories', categoryRoutes);
-app.use('/api/wishlists', wishlistRoutes);
+app.use('/api/wishlists', auth, wishlistRoutes);
 
 //This should not be moved
 app.use(routeNotFound);
