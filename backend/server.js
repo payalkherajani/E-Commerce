@@ -15,8 +15,6 @@ const app = express();
 app.use(express.json()); //to accept req.body
 app.use(cors());
 
-
-
 connectDB()
 
 //routes
