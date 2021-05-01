@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import useCustomContext from '../../customHooks/Hook';
-import { PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../../constants/ProductConstants';
 import axios from 'axios';
-import { ADD_TO_CART } from '../../constants/CartConstants';
+import { ADD_TO_CART, PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../../constants/type';
 import { Loader, Message, Rating } from '../../components'
 import style from './singleproduct.module.css';
 import { Link } from 'react-router-dom';
 import Config from '../../config/Config';
+import { auth } from '../../utlis/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const { serverUrl } = Config;
 
 
 const SingleProduct = ({ match: { params: { id } } }) => {
+    const token = auth()
 
     const { state, dispatch } = useCustomContext();
     const { product, loading, error, cart } = state;
@@ -19,10 +22,22 @@ const SingleProduct = ({ match: { params: { id } } }) => {
     const fetchSingleProductDetails = async () => {
         try {
             dispatch({ type: PRODUCTS_DETAILS_REQUEST });
-            const { data } = await axios.get(`${serverUrl}/api/products/${id}`);
+            const { data } = await axios.get(`${serverUrl}/api/products/${id}`, { headers: token });
             dispatch({ type: PRODUCTS_DETAILS_SUCCESS, payload: data })
         } catch (err) {
-            dispatch({ type: PRODUCTS_DETAILS_FAILURE, payload: 'Something went wrong' })
+            dispatch({ type: PRODUCTS_DETAILS_FAILURE, payload: 'Something went wrong' });
+            const error = err.response.data.message;
+            toast.error(`${error}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+
         }
     }
 
@@ -36,7 +51,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
     }
 
     const checkincart = () => {
-        return !!cart.find((item) => item.id === product.id)
+        return !!cart.find((item) => item.productId._id === product._id)
     }
 
     const { name, description, countInStock, image, rating, numReviews, category, price } = product;
@@ -85,6 +100,17 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                     </div>
                 )
             }
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }
