@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useCustomContext from '../../customHooks/Hook';
 import { Message, Rating } from '../../components';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,7 @@ import styles from './wishlist.module.css';
 import axios from 'axios';
 import { auth } from '../../utlis/auth';
 import Config from '../../config/Config';
-import { GET_WISHLIST_DATA, REMOVE_FROM_WISHLIST, ADD_TO_CART } from '../../constants/type';
+import { REMOVE_FROM_WISHLIST, ADD_TO_CART } from '../../constants/type';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const { serverUrl } = Config
@@ -34,19 +34,10 @@ const WishList = () => {
         }
     }
 
-    const addToCart = (item) => {
-        const updateQtyProduct = { ...item, qty: qty }
-        dispatch({ type: ADD_TO_CART, payload: updateQtyProduct })
-    }
-
-    const checkincart = (item) => {
-        return !!cart.find((x) => x.productId._id === item._id)
-    }
-
-    const fetchProductsinWishlist = async () => {
+    const addToCart = async (item) => {
         try {
-            const { data: { productsinWishlist } } = await axios.get(`${serverUrl}/api/wishlists`, { headers: token });
-            dispatch({ type: GET_WISHLIST_DATA, payload: productsinWishlist })
+            const { data } = await axios.post(`${serverUrl}/api/carts`, { 'productId': item._id, 'quantity': qty }, { headers: token });
+            dispatch({ type: ADD_TO_CART, payload: data.productsinCart })
         } catch (err) {
             const error = err.response.data.message;
             toast.error(`${error}`, {
@@ -61,11 +52,9 @@ const WishList = () => {
         }
     }
 
-    useEffect(() => {
-        fetchProductsinWishlist()
-    }, [])
-
-
+    const checkincart = (item) => {
+        return !!cart.find((x) => x.productId._id === item._id)
+    }
 
     return (
         <div className={styles.wishlist_container}>

@@ -17,7 +17,8 @@ const getCartByUserID = async (req, res) => {
             'rating',
             'numReviews',
             'qty',
-            'category'
+            'category',
+            'image'
         ]);
         if (!findCart) {
             return res.status(400).json({ success: false, message: "Cart not Found" })
@@ -67,7 +68,17 @@ const addIteminCart = async (req, res) => {
             productsinCart: products
         }
 
-        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true })
+        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true }).populate('productsinCart.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category',
+            'image'
+        ]);
 
         res.status(200).send(updatedCart)
 
@@ -105,7 +116,17 @@ const updateIteminCart = async (req, res) => {
             productsinCart: updatedQuantity
         }
 
-        const updatedProductsQunatityinCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true })
+        const updatedProductsQunatityinCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true }).populate('productsinCart.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category',
+            'image'
+        ]);;
 
         return res.status(200).send(updatedProductsQunatityinCart);
 
@@ -139,7 +160,17 @@ const deleteProductFromCart = async (req, res) => {
             productsinCart: products
         }
 
-        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true });
+        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true }).populate('productsinCart.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category',
+            'image'
+        ]);
 
         res.status(200).send(updatedCart);
     } catch (err) {

@@ -1,8 +1,4 @@
-import { ADD_ITEM_TO_CART, ADD_TO_CART, REMOVE_FROM_CART } from '../constants/CartConstants';
-import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH } from '../constants/FilterConstants';
-import { PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_REQUEST, PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS } from '../constants/ProductConstants';
-import { GET_CART_DATA, GET_WISHLIST_DATA, USER_LOGGED_IN, USER_LOGOUT } from '../constants/type';
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../constants/WishListConstants';
+import { ADD_ITEM_TO_CART, ADD_TO_CART, REMOVE_FROM_CART, CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_REQUEST, PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, GET_CART_DATA, GET_WISHLIST_DATA, USER_LOGGED_IN, USER_LOGOUT, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../constants/type';
 
 export const reducer = (state, action) => {
     const { type, payload } = action;
@@ -33,21 +29,13 @@ export const reducer = (state, action) => {
             return { ...state, wishlist: payload }
 
         case ADD_TO_CART:
-            return { ...state, cart: [...state.cart, payload] }
+            return { ...state, cart: payload }
 
         case REMOVE_FROM_CART:
-            const updatedCart = state.cart.filter((x) => x.id !== payload);
-            return { ...state, cart: updatedCart }
+            return { ...state, cart: payload }
 
         case ADD_ITEM_TO_CART:
-            const { newQty, id } = payload;
-            const updatedCartItemsQty = state.cart.map((item) => {
-                if (item.id === id) {
-                    return { ...item, qty: newQty }
-                }
-                return item
-            })
-            return { ...state, cart: updatedCartItemsQty }
+            return { ...state, cart: payload }
 
         case PRICE_HIGH_TO_LOW:
             return { ...state, sortBy: payload }
