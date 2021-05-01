@@ -45,9 +45,23 @@ const SingleProduct = ({ match: { params: { id } } }) => {
         fetchSingleProductDetails()
     }, [])
 
-    const addToCart = () => {
-        const updateQtyProduct = { ...product, qty: qty }
-        dispatch({ type: ADD_TO_CART, payload: updateQtyProduct })
+    const addToCart = async () => {
+        try {
+            const { data } = await axios.post(`${serverUrl}/api/carts`, { 'productId': product._id, 'quantity': qty }, { headers: token });
+            dispatch({ type: ADD_TO_CART, payload: data.productsinCart })
+
+        } catch (err) {
+            const error = err.response.data.message;
+            toast.error(`${error}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
     }
 
     const checkincart = () => {
