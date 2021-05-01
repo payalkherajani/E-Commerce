@@ -55,7 +55,7 @@ export const reducer = (state, action) => {
 
         case USER_LOGGED_IN:
             localStorage.setItem('TOKEN', payload);
-            return { ...state, user: payload }
+            return state
 
         case USER_LOGOUT:
             localStorage.removeItem('TOKEN', payload);

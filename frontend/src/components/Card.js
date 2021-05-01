@@ -1,7 +1,7 @@
 import React from 'react';
 import Rating from './Rating';
 import { Link } from 'react-router-dom';
-import { ADD_TO_WISHLIST } from '../constants/WishListConstants';
+import { ADD_TO_WISHLIST } from '../constants/type';
 import useCustomContext from '../customHooks/Hook';
 import axios from 'axios';
 import Config from '../config/Config';

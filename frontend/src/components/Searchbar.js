@@ -1,6 +1,6 @@
 import React from 'react';
 import useCustomContext from '../customHooks/Hook';
-import { SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH } from '../constants/FilterConstants';
+import { SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH } from '../constants/type';
 
 const Searchbar = () => {
 
