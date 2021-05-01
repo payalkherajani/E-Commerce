@@ -17,8 +17,9 @@ const getWishlistByUserID = async (req, res) => {
             'rating',
             'numReviews',
             'qty',
-            'category'
-        ]);;
+            'category',
+            'image'
+        ]);
         if (!findwishlist) {
             return res.status(400).json({ success: false, message: "Wishlist not Found" })
         }
@@ -36,7 +37,7 @@ const getWishlistByUserID = async (req, res) => {
 const addIteminwishlist = async (req, res) => {
     try {
 
-        const { id } = req.params; //wishlistID
+        const userId = req.user;
 
         const { productId, quantity } = req.body;
 
@@ -47,7 +48,7 @@ const addIteminwishlist = async (req, res) => {
             return res.status(400).json({ success: false, message: "InValid Product" })
         }
 
-        const wishlist = await Wishlist.findOne({ _id: id });
+        const wishlist = await Wishlist.findOne({ user: userId });
 
         const isProductPresent = !!wishlist.productsinWishlist.find((p) => p.productId == productId)
 
@@ -67,7 +68,17 @@ const addIteminwishlist = async (req, res) => {
             productsinWishlist: products
         }
 
-        const updatedwishlist = await Wishlist.findOneAndUpdate({ _id: id }, { $set: updatedDetails }, { new: true })
+        const updatedwishlist = await Wishlist.findOneAndUpdate({ _id: wishlist._id }, { $set: updatedDetails }, { new: true }).populate('productsinWishlist.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category',
+            'image'
+        ])
 
         res.status(200).send(updatedwishlist)
 
@@ -100,7 +111,17 @@ const deleteProductFromwishlist = async (req, res) => {
             productsinWishlist: products
         }
 
-        const updatedwishlist = await Wishlist.findOneAndUpdate({ _id: wishlist._id }, { $set: updatedDetails }, { new: true });
+        const updatedwishlist = await Wishlist.findOneAndUpdate({ _id: wishlist._id }, { $set: updatedDetails }, { new: true }).populate('productsinWishlist.productId', [
+            'name',
+            'price',
+            'description',
+            'countInStock',
+            'rating',
+            'numReviews',
+            'qty',
+            'category',
+            'image'
+        ]);
 
         res.status(200).send(updatedwishlist);
     } catch (err) {

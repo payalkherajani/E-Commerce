@@ -27,11 +27,10 @@ export const reducer = (state, action) => {
             return { ...state, error: payload, loading: false }
 
         case ADD_TO_WISHLIST:
-            return { ...state, wishlist: [...state.wishlist, payload] }
+            return { ...state, wishlist: payload }
 
         case REMOVE_FROM_WISHLIST:
-            const updatedWishlist = state.wishlist.filter((x) => x.id !== payload);
-            return { ...state, wishlist: updatedWishlist }
+            return { ...state, wishlist: payload }
 
         case ADD_TO_CART:
             return { ...state, cart: [...state.cart, payload] }
