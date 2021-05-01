@@ -28,7 +28,7 @@ app.use('/api/wishlists', auth, wishlistRoutes);
 app.use(routeNotFound);
 app.use(errorHandler);
 
-const PORT = 5000 || process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server Started on PORT ${PORT}`)
