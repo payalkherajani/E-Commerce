@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Loader, Sidebar, Message, Card, Searchbar } from '../../components';
 import Config from '../../config/Config';
 import { auth } from '../../utlis/auth';
-import { GET_CART_DATA, GET_WISHLIST_DATA, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST } from '../../constants/type';
+import { GET_CART_DATA, GET_WISHLIST_DATA, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST, FETCH_USER_DETAILS } from '../../constants/type';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const { serverUrl } = Config
@@ -84,6 +84,28 @@ const Products = () => {
 
     useEffect(() => {
         fetchCartProducts()
+    }, [])
+
+    const fetchUserDetails = async () => {
+        try {
+            const { data } = await axios.get(`${serverUrl}/api/users`, { headers: token });
+            dispatch({ type: FETCH_USER_DETAILS, payload: data })
+        } catch (err) {
+            const error = err.response.data.message;
+            toast.error(`${error}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }
+
+    useEffect(() => {
+        fetchUserDetails()
     }, [])
 
     const getSortedData = (state, products) => {

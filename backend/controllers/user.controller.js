@@ -94,8 +94,8 @@ const loginUser = async (req, res) => {
 
 const getUserByID = async (req, res) => {
     try {
-        const { id } = req.params
-        const user = await User.findOne({ _id: id });
+        const userId = req.user
+        const user = await User.findOne({ _id: userId }).select('-password');
         if (!user) {
             return res.status(400).json({ success: false, message: 'No user Found with this ID ' })
         }

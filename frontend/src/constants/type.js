@@ -1,5 +1,6 @@
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const FETCH_USER_DETAILS = 'FETCH_USER_DETAILS';
 
 export const GET_WISHLIST_DATA = 'GET_WISHLIST_DATA';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';

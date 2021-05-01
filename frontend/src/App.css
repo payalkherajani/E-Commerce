@@ -179,8 +179,13 @@ input[type=radio]:checked {
 
 
   /* -------------------------------------------------------- SEARCHBAR--------------------------------------------------------------- */
-  .searchbar{
-      margin-top: 5rem;
+  .searchbar-div{
+    margin-top: 5rem;
+  }
+  .searchbar-name{
+      margin-bottom: 1rem;
+  }
+  .searchbar{ 
       display: flex;
       align-items: center;
       justify-content: center;
@@ -194,7 +199,7 @@ input[type=radio]:checked {
       right: 40px;
   }
   @media only screen and (min-width: 768px){
-       .searchbar{
+       .searchbar-div{
            margin-top: 8.5rem;
            margin-bottom: 0.5rem;
        }
