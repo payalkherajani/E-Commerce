@@ -4,8 +4,7 @@
   "description": "Web App",
   "main": "server.js",
   "scripts": {
-    "client": "npm start --prefix frontend",
-    "server": "cd backend && nodemon server.js",
+    "server": "nodemon server.js",
     "start": "node server.js"
   },
   "repository": {
