@@ -1,7 +1,7 @@
 import { ADD_ITEM_TO_CART, ADD_TO_CART, REMOVE_FROM_CART } from '../constants/CartConstants';
 import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH } from '../constants/FilterConstants';
 import { PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_REQUEST, PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS } from '../constants/ProductConstants';
-import { USER_LOGGED_IN, USER_LOGOUT } from '../constants/type';
+import { GET_CART_DATA, GET_WISHLIST_DATA, USER_LOGGED_IN, USER_LOGOUT } from '../constants/type';
 import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../constants/WishListConstants';
 
 export const reducer = (state, action) => {
@@ -74,6 +74,11 @@ export const reducer = (state, action) => {
             localStorage.removeItem('TOKEN', payload);
             return { ...state, user: {} }
 
+        case GET_WISHLIST_DATA:
+            return { ...state, wishlist: payload }
+
+        case GET_CART_DATA:
+            return { ...state, cart: payload }
         default:
             return state
     }

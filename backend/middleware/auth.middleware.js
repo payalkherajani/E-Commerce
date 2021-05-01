@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     const token = req.header('x-auth-token');
 
     if (!token) {
-        return res.status(401).json({ msg: 'No token, authorization denied' })
+        return res.status(401).json({ message: 'No token, authorization denied' })
     }
 
     try {
@@ -25,7 +25,7 @@ const auth = async (req, res, next) => {
             next();
         }
         else {
-            return res.status(401).json({ msg: 'Bad token, authorization denied' })
+            return res.status(401).json({ message: 'Bad token, authorization denied' })
         }
     }
     catch (err) {
