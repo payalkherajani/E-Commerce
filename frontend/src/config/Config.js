@@ -1,5 +1,5 @@
 const Config = {
-    serverUrl: process.env.PROD_API || "http://localhost:5000"
+    serverUrl: "https://stormy-castle-43023.herokuapp.com"
 }
 
 export default Config;
