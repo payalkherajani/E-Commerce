@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import useCustomContext from '../../customHooks/Hook';
 import axios from 'axios';
-import { ADD_TO_CART, PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../../constants/type';
+import { PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAILURE } from '../../constants/type';
 import { Loader, Message, Rating } from '../../components'
 import style from './singleproduct.module.css';
 import { Link } from 'react-router-dom';
 import Config from '../../config/Config';
 import { auth } from '../../utlis/auth';
 import { toast } from 'react-toastify';
+import { addToCart } from '../../utlis/cart'
 const { serverUrl } = Config;
 
 
@@ -27,8 +28,6 @@ const SingleProduct = ({ match: { params: { id } } }) => {
             dispatch({ type: PRODUCTS_DETAILS_FAILURE, payload: 'Something went wrong' });
             const error = err.response.data.message;
             toast.error(`${error}`);
-
-
         }
     }
 
@@ -36,19 +35,8 @@ const SingleProduct = ({ match: { params: { id } } }) => {
         fetchSingleProductDetails()
     }, [])
 
-    const addToCart = async () => {
-        try {
-            const { data } = await axios.post(`${serverUrl}/api/carts`, { 'productId': product._id, 'quantity': qty }, { headers: token });
-            dispatch({ type: ADD_TO_CART, payload: data.productsinCart })
-
-        } catch (err) {
-            const error = err.response.data.message;
-            toast.error(`${error}`);
-        }
-    }
-
     const checkincart = () => {
-        return !!cart.find((item) => item.productId._id === product._id)
+        return cart.some((item) => item.productId._id === product._id)
     }
 
     const { name, description, countInStock, image, rating, numReviews, category, price } = product;
@@ -89,7 +77,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                                         checkincart() === true ?
                                             <button disabled className="btn btn-success">Added to cart</button>
                                             :
-                                            <button onClick={() => addToCart()} disabled={countInStock === 0} className="btn btn-info">Add to cart</button>
+                                            <button onClick={() => addToCart(product, qty, token, dispatch)} disabled={countInStock === 0} className="btn btn-info">Add to cart</button>
                                     }
                                 </li>
                             </ul>

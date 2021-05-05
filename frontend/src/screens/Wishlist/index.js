@@ -6,8 +6,9 @@ import styles from './wishlist.module.css';
 import axios from 'axios';
 import { auth } from '../../utlis/auth';
 import Config from '../../config/Config';
-import { REMOVE_FROM_WISHLIST, ADD_TO_CART } from '../../constants/type';
+import { REMOVE_FROM_WISHLIST } from '../../constants/type';
 import { toast } from 'react-toastify';
+import { addToCart } from '../../utlis/cart'
 
 const { serverUrl } = Config
 
@@ -26,18 +27,8 @@ const WishList = () => {
         }
     }
 
-    const addToCart = async (item) => {
-        try {
-            const { data } = await axios.post(`${serverUrl}/api/carts`, { 'productId': item._id, 'quantity': qty }, { headers: token });
-            dispatch({ type: ADD_TO_CART, payload: data.productsinCart })
-        } catch (err) {
-            const error = err.response.data.message;
-            toast.error(`${error}`);
-        }
-    }
-
     const checkincart = (item) => {
-        return !!cart.find((x) => x.productId._id === item._id)
+        return cart.some((x) => x.productId._id === item._id)
     }
 
     return (
@@ -81,7 +72,7 @@ const WishList = () => {
                                                         checkincart(productId) === true ?
                                                             <button disabled className="btn btn-success">Added to cart</button>
                                                             :
-                                                            <button onClick={() => addToCart(productId)} disabled={productId.countInStock === 0} className="btn btn-info">Add to cart</button>
+                                                            <button onClick={() => addToCart(productId, qty, token, dispatch)} disabled={productId.countInStock === 0} className="btn btn-info">Add to cart</button>
                                                     }
                                                 </li>
                                                 <li className={styles.list_item}><button className="btn btn-danger" onClick={() => removefromWishList(productId._id)}>Remove</button></li>

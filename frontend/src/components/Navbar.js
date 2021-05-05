@@ -21,25 +21,25 @@ const Navbar = () => {
                     <ul className={visible === true ? ("nav-list") : (" nav-list nav-list-none")}>
 
                         <Link to={{ pathname: '/products' }}>
-                            <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
+                            <li className="badge-relative padding-half" onClick={() => setVisible((visible) => !visible)}>
                                 Products
                         </li>
                         </Link>
 
                         <Link to={{ pathname: '/wishlist' }}>
-                            <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
+                            <li className="badge-relative padding-half" onClick={() => setVisible((visible) => !visible)}>
                                 WishList
                             <span className="badge-nav-wishlist">{state.wishlist.length}</span>
                             </li>
                         </Link>
                         <Link to={{ pathname: '/cart' }}>
-                            <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
+                            <li className="badge-relative padding-half" onClick={() => setVisible((visible) => !visible)}>
                                 Cart
                             <span className="badge-nav-cart">{state.cart.length}</span>
                             </li>
                         </Link>
                         <Link to={{ pathname: '/' }}>
-                            <li className="badge-relative" onClick={() => {
+                            <li className="badge-relative padding-half" onClick={() => {
                                 setVisible((visible) => !visible)
                                 dispatch({ type: USER_LOGOUT })
                             }}>

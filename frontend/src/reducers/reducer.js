@@ -23,18 +23,14 @@ export const reducer = (state, action) => {
             return { ...state, error: payload, loading: false }
 
         case ADD_TO_WISHLIST:
-            return { ...state, wishlist: payload }
-
         case REMOVE_FROM_WISHLIST:
+        case GET_WISHLIST_DATA:
             return { ...state, wishlist: payload }
 
         case ADD_TO_CART:
-            return { ...state, cart: payload }
-
         case REMOVE_FROM_CART:
-            return { ...state, cart: payload }
-
         case ADD_ITEM_TO_CART:
+        case GET_CART_DATA:
             return { ...state, cart: payload }
 
         case PRICE_HIGH_TO_LOW:
@@ -60,12 +56,6 @@ export const reducer = (state, action) => {
         case USER_LOGOUT:
             localStorage.removeItem('TOKEN', payload);
             return { ...state, user: {} }
-
-        case GET_WISHLIST_DATA:
-            return { ...state, wishlist: payload }
-
-        case GET_CART_DATA:
-            return { ...state, cart: payload }
 
         case FETCH_USER_DETAILS:
             return { ...state, user: payload }

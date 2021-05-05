@@ -27,7 +27,7 @@ const Card = ({ product }) => {
     }
 
     const check = () => {
-        return !!wishlist.find((x) => x.productId._id === _id);
+        return wishlist.some((x) => x.productId._id === _id);
     }
 
     return (
