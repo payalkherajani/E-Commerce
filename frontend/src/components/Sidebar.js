@@ -1,5 +1,5 @@
 import React from 'react';
-import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../constants/FilterConstants';
+import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../constants/type';
 import useCustomContext from '../customHooks/Hook';
 
 const Sidebar = () => {

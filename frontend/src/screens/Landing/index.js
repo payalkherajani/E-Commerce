@@ -1,14 +1,19 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 const Landing = () => {
+
     return (
-        <div className="landing">
-            <div className="landing-inner-center">
-                <p className="lead">
-                    We'll make your journey remarkable. Shop with us!
+        localStorage.getItem('TOKEN') ? (<Redirect to="/products" />) : (
+            <div className="landing">
+                <div className="landing-inner-center">
+                    <p className="lead">
+                        We'll make your journey remarkable. Shop with us!
                 </p>
+                </div>
             </div>
-        </div>
+        )
+
     )
 }
 
