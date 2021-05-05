@@ -52,16 +52,16 @@ const Navbar = () => {
                     <ul className={visible === true ? ("nav-list") : (" nav-list nav-list-none")}>
 
                         <Link to={{ pathname: '/login' }}>
-                            <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
+                            <li className="badge-relative padding-half" onClick={() => setVisible((visible) => !visible)}>
                                 Login
-                       </li>
+                            </li>
                         </Link>
 
 
                         <Link to={{ pathname: '/register' }}>
-                            <li className="badge-relative" onClick={() => setVisible((visible) => !visible)}>
+                            <li className="badge-relative padding-half" onClick={() => setVisible((visible) => !visible)}>
                                 Register
-                        </li>
+                            </li>
                         </Link>
                     </ul>
                 )
