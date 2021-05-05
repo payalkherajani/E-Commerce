@@ -3,8 +3,7 @@ import styles from './register.module.css';
 import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Config from '../../config/Config'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 const { serverUrl } = Config
 
 const Register = () => {
@@ -37,16 +36,7 @@ const Register = () => {
             }
             catch (err) {
                 const error = err.response.data.message;
-                toast.error(`${error}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-
+                toast.error(`${error}`);
             }
             finally {
                 setFormData({ ...formData, name: '', email: '', password: '', confirmpassword: '' })
@@ -54,15 +44,7 @@ const Register = () => {
 
         }
         else {
-            toast.error(`Password does not match`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`Password does not match`);
         }
     }
 
@@ -116,17 +98,6 @@ const Register = () => {
                         />
                     </div>
                     <button className={`btn btn-primary ${styles.login_button}`}>Register</button>
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
                 </form>
             </div>
         )

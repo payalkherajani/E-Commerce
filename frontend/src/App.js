@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Products, SingleProduct, WishList, Landing, Cart, Register, Login } from './screens';
 import { Navbar } from './components';
 import PrivateRoute from './routes/Privateroute';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
 const App = () => {
@@ -24,6 +26,17 @@ const App = () => {
           </Fragment>
         </Switch>
       </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   )
 }

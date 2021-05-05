@@ -3,8 +3,7 @@ import styles from './login.module.css';
 import axios from 'axios';
 import Config from '../../config/Config';
 import useCustomContext from '../../customHooks/Hook'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { USER_LOGGED_IN } from '../../constants/type';
 import { Redirect, useHistory } from 'react-router-dom';
 const { serverUrl } = Config;
@@ -33,15 +32,7 @@ const Login = () => {
             history.push("/products");
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
         finally {
             setFormData({ ...formData, email: '', password: '' })
@@ -80,19 +71,6 @@ const Login = () => {
                             />
                         </div>
                         <button className={`btn btn-primary ${styles.login_button}`}>Login</button>
-
-                        <ToastContainer
-                            position="top-right"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                        />
-
                     </form>
                 </div>
             )

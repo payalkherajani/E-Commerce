@@ -6,8 +6,7 @@ import useCustomContext from '../customHooks/Hook';
 import axios from 'axios';
 import Config from '../config/Config';
 import { auth } from '../utlis/auth';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const { serverUrl } = Config;
 
@@ -23,15 +22,7 @@ const Card = ({ product }) => {
             dispatch({ type: ADD_TO_WISHLIST, payload: data.productsinWishlist })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -66,17 +57,6 @@ const Card = ({ product }) => {
                     </div>
                 </div>
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
         </div>
     )
 }

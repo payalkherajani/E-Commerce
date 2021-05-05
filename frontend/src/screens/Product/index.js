@@ -5,8 +5,7 @@ import { Loader, Sidebar, Message, Card, Searchbar } from '../../components';
 import Config from '../../config/Config';
 import { auth } from '../../utlis/auth';
 import { GET_CART_DATA, GET_WISHLIST_DATA, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE, PRODUCTS_LIST_REQUEST, FETCH_USER_DETAILS } from '../../constants/type';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 const { serverUrl } = Config
 
 const Products = () => {
@@ -23,15 +22,7 @@ const Products = () => {
         } catch (err) {
             dispatch({ type: PRODUCTS_LIST_FAILURE, payload: 'Something went Wrong' })
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
 
         }
     }
@@ -47,15 +38,7 @@ const Products = () => {
             dispatch({ type: GET_WISHLIST_DATA, payload: productsinWishlist })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -69,15 +52,7 @@ const Products = () => {
             dispatch({ type: GET_CART_DATA, payload: productsinCart })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -92,15 +67,7 @@ const Products = () => {
             dispatch({ type: FETCH_USER_DETAILS, payload: data })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -152,18 +119,6 @@ const Products = () => {
                         )
                     }
                 </div>
-
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
             </div>
         </>
 

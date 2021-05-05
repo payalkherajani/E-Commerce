@@ -7,8 +7,8 @@ import { Message } from '../../components';
 import { auth } from '../../utlis/auth';
 import Config from '../../config/Config';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 const { serverUrl } = Config;
 
 const Cart = () => {
@@ -18,19 +18,10 @@ const Cart = () => {
     const removefromcart = async (id) => {
         try {
             const response = await axios.delete(`${serverUrl}/api/carts/${id}`, { headers: token })
-            console.log(response)
             dispatch({ type: REMOVE_FROM_CART, payload: response.data.productsinCart })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -41,15 +32,7 @@ const Cart = () => {
             dispatch({ type: ADD_ITEM_TO_CART, payload: data.productsinCart })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -97,18 +80,6 @@ const Cart = () => {
                     )
 
             }
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-
         </div>
     )
 }

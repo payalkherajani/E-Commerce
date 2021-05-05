@@ -7,8 +7,7 @@ import style from './singleproduct.module.css';
 import { Link } from 'react-router-dom';
 import Config from '../../config/Config';
 import { auth } from '../../utlis/auth';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 const { serverUrl } = Config;
 
 
@@ -27,15 +26,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
         } catch (err) {
             dispatch({ type: PRODUCTS_DETAILS_FAILURE, payload: 'Something went wrong' });
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
 
 
         }
@@ -52,15 +43,7 @@ const SingleProduct = ({ match: { params: { id } } }) => {
 
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -114,17 +97,6 @@ const SingleProduct = ({ match: { params: { id } } }) => {
                     </div>
                 )
             }
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
         </div>
     )
 }

@@ -7,8 +7,8 @@ import axios from 'axios';
 import { auth } from '../../utlis/auth';
 import Config from '../../config/Config';
 import { REMOVE_FROM_WISHLIST, ADD_TO_CART } from '../../constants/type';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 const { serverUrl } = Config
 
 const WishList = () => {
@@ -22,15 +22,7 @@ const WishList = () => {
             dispatch({ type: REMOVE_FROM_WISHLIST, payload: data.productsinWishlist })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -40,15 +32,7 @@ const WishList = () => {
             dispatch({ type: ADD_TO_CART, payload: data.productsinCart })
         } catch (err) {
             const error = err.response.data.message;
-            toast.error(`${error}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`${error}`);
         }
     }
 
@@ -108,17 +92,6 @@ const WishList = () => {
                             }
                         </div>
                     )}
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
         </div>
     )
 }
