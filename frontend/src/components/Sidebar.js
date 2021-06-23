@@ -3,7 +3,7 @@ import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, EXCLUDE_OUT_OF
 import useCustomContext from '../customHooks/Hook';
 
 const Sidebar = () => {
-    const { state: { sortBy }, dispatch } = useCustomContext();
+    const { state: { sortBy, exclude_out_of_stock }, dispatch } = useCustomContext();
 
     const handlePriceSorting = (e) => {
         let { name, value } = e.target;
@@ -23,6 +23,7 @@ const Sidebar = () => {
     const clearFilters = () => {
         dispatch({ type: CLEAR_ALL_FILTERS })
     }
+
     return (
         <section className="sidebar sidebar-top">
             <button onClick={clearFilters} className="btn btn-danger">Clear All Filters</button>
@@ -41,7 +42,7 @@ const Sidebar = () => {
                 </li>
                 <li className="sidebar-list-item gray">
                     <label>
-                        <input type="checkbox" className="checkmark" onChange={handleCheckbox} />
+                        <input type="checkbox" className="checkmark" onChange={handleCheckbox} value={exclude_out_of_stock} checked={exclude_out_of_stock} />
                         EXCLUDE OUT OF STOCK
                     </label>
                 </li>

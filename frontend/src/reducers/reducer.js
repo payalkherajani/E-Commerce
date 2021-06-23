@@ -40,7 +40,7 @@ export const reducer = (state, action) => {
             return { ...state, sortBy: payload }
 
         case CLEAR_ALL_FILTERS:
-            return { ...state, sortBy: '' }
+            return { ...state, sortBy: '', exclude_out_of_stock: false }
 
         case SEARCH_KEYWORD_REQUEST:
             const toSearch = payload.toLowerCase();
