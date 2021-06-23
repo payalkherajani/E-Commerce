@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { fetchCartProducts } from './services/cart.service';
 import useCustomContext from './customHooks/Hook';
+import { fetchProductsinWishlist } from './services/wishlist.service';
+import { fetchUserDetails } from './services/users.service';
 
 
 const App = () => {
@@ -17,6 +19,8 @@ const App = () => {
   useEffect(() => {
     if (localStorage.TOKEN) {
       fetchCartProducts(dispatch)
+      fetchProductsinWishlist(dispatch)
+      fetchUserDetails(dispatch)
     }
   }, [])
 
