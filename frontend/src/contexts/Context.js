@@ -13,6 +13,7 @@ const initialState = {
     sortBy: '',
     keyword: '',
     user: {},
+    exclude_out_of_stock: false
 }
 
 export const Provider = ({ children }) => {

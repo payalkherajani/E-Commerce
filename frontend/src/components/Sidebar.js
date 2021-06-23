@@ -1,5 +1,5 @@
 import React from 'react';
-import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH } from '../constants/type';
+import { CLEAR_ALL_FILTERS, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, EXCLUDE_OUT_OF_STOCK } from '../constants/type';
 import useCustomContext from '../customHooks/Hook';
 
 const Sidebar = () => {
@@ -16,6 +16,10 @@ const Sidebar = () => {
         }
     }
 
+    const handleCheckbox = (e) => {
+        dispatch({ type: EXCLUDE_OUT_OF_STOCK, payload: e.target.checked })
+    }
+
     const clearFilters = () => {
         dispatch({ type: CLEAR_ALL_FILTERS })
     }
@@ -26,13 +30,19 @@ const Sidebar = () => {
                 <li className="sidebar-list-item gray" >
                     <label>
                         <input type="radio" name="ascending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_LOW_TO_HIGH} className="checkmark" value={sortBy} />
-                         LOW TO HIGH
+                        LOW TO HIGH
                     </label>
                 </li>
                 <li className="sidebar-list-item gray">
                     <label>
                         <input type="radio" name="descending" onChange={handlePriceSorting} checked={sortBy && sortBy === PRICE_HIGH_TO_LOW} className="checkmark" value={sortBy} />
                         HIGH TO LOW
+                    </label>
+                </li>
+                <li className="sidebar-list-item gray">
+                    <label>
+                        <input type="checkbox" className="checkmark" onChange={handleCheckbox} />
+                        EXCLUDE OUT OF STOCK
                     </label>
                 </li>
             </ul>

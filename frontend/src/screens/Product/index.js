@@ -88,6 +88,11 @@ const Products = () => {
         if (state.keyword) {
             sortedProducts = sortedProducts.filter((x) => x.name.toLowerCase().includes(state.keyword));
         }
+        if (state.exclude_out_of_stock) {
+            console.log(" I am running here", state)
+            sortedProducts = sortedProducts.filter((x) => x.countInStock !== 0)
+            console.log({ sortedProducts })
+        }
         if (state.sortBy === '' || state.keyword === '') {
             sortedProducts = sortedProducts
         }
