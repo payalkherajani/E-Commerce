@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Products, SingleProduct, WishList, Landing, Cart, Register, Login } from './screens';
@@ -6,9 +6,19 @@ import { Navbar } from './components';
 import PrivateRoute from './routes/Privateroute';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { fetchCartProducts } from './services/cart.service';
+import useCustomContext from './customHooks/Hook';
 
 
 const App = () => {
+
+  const { dispatch } = useCustomContext();
+
+  useEffect(() => {
+    if (localStorage.TOKEN) {
+      fetchCartProducts(dispatch)
+    }
+  }, [])
 
   return (
     <div className="app">
