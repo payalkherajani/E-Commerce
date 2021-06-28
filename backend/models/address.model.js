@@ -8,11 +8,6 @@ const addressSchema = new Schema({
     },
     address: [
         {
-            delivery_address: {
-                type: Boolean,
-                default: true,
-                required: true
-            },
             city: {
                 type: String,
                 required: true
@@ -28,6 +23,11 @@ const addressSchema = new Schema({
             country: {
                 type: String,
                 required: true
+            },
+            is_active: {
+                type: Boolean,
+                required: true,
+                default: true
             }
 
         }
