@@ -47,9 +47,32 @@ const addNewAddress = async (req, res) => {
 
 }
 
-const EditDetailsOfAddressWithID = async (req, res) => {
+const editDetailsOfAddressWithID = async (req, res) => {
     try {
-
+        const { addressId } = req.params
+        const { city, street, pincode, country } = req.body
+        const userId = req.user
+        const alladdress = await Address.findOne({ user: userId })
+        const updateAddress = alladdress.address.map((a) => {
+            if (a._id == addressId) {
+                if (city) {
+                    a.city = city
+                }
+                if (street) {
+                    a.street = street
+                }
+                if (pincode) {
+                    a.pincode = pincode
+                }
+                if (country) {
+                    a.country = country
+                }
+                return a
+            }
+            return a
+        })
+        const editedAddress = await Address.findOneAndUpdate({ user: userId }, { $set: { user: userId, address: updateAddress } }, { new: true })
+        return res.status(200).json({ success: true, editedAddress })
     } catch (err) {
         console.log(err)
         return res.status(500).json({ success: false, message: 'Server Error' })
@@ -69,5 +92,5 @@ const deleteAddressWithID = async (req, res) => {
         return res.status(500).json({ success: false, message: 'Server Error' })
     }
 }
-module.exports = { addNewAddress, EditDetailsOfAddressWithID, deleteAddressWithID }
+module.exports = { addNewAddress, editDetailsOfAddressWithID, deleteAddressWithID }
 
