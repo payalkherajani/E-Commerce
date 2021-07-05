@@ -58,13 +58,12 @@ const EditDetailsOfAddressWithID = async (req, res) => {
 
 const deleteAddressWithID = async (req, res) => {
     try {
-        // const userId = req.user
-        // let allAddress = await Address.findOne({ user: userId })
-        // const { addressId } = req.params
-        // allAddress = allAddress.address.filter((a) => a._id !== addressId)
-        // await allAddress.save()
-        // res.status(200).json({ success: true, allAddress })
-
+        const userId = req.user
+        const allAddress = await Address.findOne({ user: userId })
+        const { addressId } = req.params
+        const updatedAddress = allAddress.address.filter((a) => a._id != addressId)
+        const removedAddress = await Address.findOneAndUpdate({ user: userId }, { $set: { user: userId, address: updatedAddress } }, { new: true })
+        res.status(200).json({ success: true, removedAddress })
     } catch (err) {
         console.log(err)
         return res.status(500).json({ success: false, message: 'Server Error' })
