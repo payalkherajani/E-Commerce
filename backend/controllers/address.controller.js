@@ -50,10 +50,11 @@ const addNewAddress = async (req, res) => {
 const editDetailsOfAddressWithID = async (req, res) => {
     try {
         const { addressId } = req.params
-        const { city, street, pincode, country } = req.body
+        const { city, street, pincode, country, is_active } = req.body
         const userId = req.user
         const alladdress = await Address.findOne({ user: userId })
         const updateAddress = alladdress.address.map((a) => {
+
             if (a._id == addressId) {
                 if (city) {
                     a.city = city
@@ -67,9 +68,17 @@ const editDetailsOfAddressWithID = async (req, res) => {
                 if (country) {
                     a.country = country
                 }
+                if (is_active !== null) {
+                    a.is_active = is_active
+                }
                 return a
             }
-            return a
+            else {
+                if (a.is_active) {
+                    a.is_active = false
+                }
+                return a
+            }
         })
         const editedAddress = await Address.findOneAndUpdate({ user: userId }, { $set: { user: userId, address: updateAddress } }, { new: true })
         return res.status(200).json({ success: true, editedAddress })
