@@ -110,7 +110,7 @@ const Products = () => {
                     <Searchbar />
                     {
                         loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                            <ul className="display-flex wrap">
+                            <ul className="display-flex wrap" style={{ marginTop: '2rem', justifyContent: 'space-around', alignItems: 'center' }}>
                                 {
                                     sortedProducts.map((product) => (
                                         <Fragment key={product._id} >

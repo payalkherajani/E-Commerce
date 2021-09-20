@@ -27,6 +27,7 @@ const Sidebar = () => {
     return (
         <section className="sidebar sidebar-top">
             <button onClick={clearFilters} className="btn btn-danger">Clear All Filters</button>
+            <h2 style={{ marginTop: '1rem', marginLeft: '1rem' }}> Prices </h2>
             <ul className="sidebar-list-group">
                 <li className="sidebar-list-item gray" >
                     <label>
