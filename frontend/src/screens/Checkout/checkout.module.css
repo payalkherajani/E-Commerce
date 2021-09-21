@@ -4,3 +4,10 @@
     font-size: 1.2rem;
     margin-bottom: 2rem;
 }
+
+.checkout_heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
