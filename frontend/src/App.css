@@ -247,7 +247,7 @@ input[type=radio]:checked {
     justify-content: center;
     position: sticky;
     border-top: 5px solid black;
-    margin-top: 1rem;
+    margin-top: 2rem;
     flex-direction: column;
     background-color: black;
     color: white;

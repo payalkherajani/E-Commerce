@@ -41,6 +41,7 @@ const Sidebar = () => {
                         HIGH TO LOW
                     </label>
                 </li>
+                <h2 style={{ marginTop: '1rem' }}> Products </h2>
                 <li className="sidebar-list-item gray">
                     <label>
                         <input type="checkbox" className="checkmark" onChange={handleCheckbox} value={exclude_out_of_stock} checked={exclude_out_of_stock} />

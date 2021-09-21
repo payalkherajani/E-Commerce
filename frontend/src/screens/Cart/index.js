@@ -46,7 +46,13 @@ const Cart = () => {
                     :
                     (
                         <div className={styles.single_cart_container}>
-                            <h3 className={styles.cart_heading}>Total price ₹{cart.reduce((acc, item) => acc + item.productId.price * item.quantity, 0)}</h3>
+
+                            <div className={styles.checkout_container}>
+                                <h3 className={styles.cart_heading}>Total price ₹{cart.reduce((acc, item) => acc + item.productId.price * item.quantity, 0)}</h3>
+                                <Link to='/checkout'><button className="btn btn-success">Checkout</button></Link>
+                            </div>
+
+
                             {
                                 cart.map(({ _id, productId: { name, price, _id: id, countInStock, image }, quantity }) => (
                                     <div key={_id} className={styles.single_card_cart} >
@@ -64,7 +70,7 @@ const Cart = () => {
                                                         {
                                                             [...Array(countInStock).keys()].map((count) => (
                                                                 <option key={count} value={count + 1}>
-                                                                    { count + 1}
+                                                                    {count + 1}
                                                                 </option>
                                                             ))
                                                         }
