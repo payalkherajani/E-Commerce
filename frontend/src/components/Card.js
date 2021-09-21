@@ -14,7 +14,6 @@ const Card = ({ product }) => {
 
     const token = auth();
     const { state: { wishlist }, dispatch } = useCustomContext();
-    console.log({ product })
     const { _id, name, image, price, numReviews, rating, countInStock } = product;
 
     const addToWishlist = async () => {

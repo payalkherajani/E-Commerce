@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Products, SingleProduct, WishList, Landing, Cart, Register, Login } from './screens';
-import { Navbar } from './components';
+import { Navbar, Footer } from './components';
 import PrivateRoute from './routes/Privateroute';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
@@ -10,6 +10,7 @@ import { fetchCartProducts } from './services/cart.service';
 import useCustomContext from './customHooks/Hook';
 import { fetchProductsinWishlist } from './services/wishlist.service';
 import { fetchUserDetails } from './services/users.service';
+
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
             <PrivateRoute exact path='/product/:id' component={SingleProduct} />
             <PrivateRoute exact path='/wishlist' component={WishList} />
             <PrivateRoute exact path='/cart' component={Cart} />
+            <Footer />
           </Fragment>
         </Switch>
       </Router>

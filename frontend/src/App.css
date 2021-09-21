@@ -239,3 +239,41 @@ input[type=radio]:checked {
         right: 120px;
     }
   }
+
+  .footer{
+    display: flex;
+    min-height: 20vh;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    border-top: 5px solid black;
+    margin-top: 1rem;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    margin: 0px;
+}
+
+.copywrite{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.padding_one{
+    padding: 0.5rem;
+}
+.list_item{
+    margin-right: 1rem;
+}
+.unorderedlist{
+    display: flex;
+}
+
+.icon_styling{
+    color: white;
+    font-size: 2rem;
+}
+
+.icon_red{
+    color: red;
+}

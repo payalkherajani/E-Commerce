@@ -1,6 +1,7 @@
 .login__container{
     margin-top: 8rem;
     text-align: center;
+    min-height: 100vh;
 }
 
 .input_login {
@@ -24,6 +25,7 @@
 
   @media only screen and (min-width:768px){
     .login__container{
+      margin-top: 2rem;
        display: flex;
        flex-direction: column;
        justify-content: center;
