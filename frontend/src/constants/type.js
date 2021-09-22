@@ -10,6 +10,7 @@ export const GET_CART_DATA = 'GET_CART_DATA';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
+export const CLEAR_CART = 'CLEAR_CART';
 
 export const PRICE_LOW_TO_HIGH = 'PRICE_LOW_TO_HIGH';
 export const PRICE_HIGH_TO_LOW = 'PRICE_HIGH_TO_LOW';
