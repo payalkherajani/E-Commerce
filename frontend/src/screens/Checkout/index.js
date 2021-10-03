@@ -3,16 +3,31 @@ import styles from './checkout.module.css'
 import { Link } from 'react-router-dom'
 import useCustomContext from '../../customHooks/Hook';
 import { CLEAR_CART } from '../../constants/type';
+import { auth } from '../../utlis/auth';
+import Config from '../../config/Config';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+const { serverUrl } = Config;
 
 const Checkout = () => {
+
+    const token = auth();
+    // console.log(token)
 
     const { state: { cart }, dispatch } = useCustomContext()
 
     const [showThankyouDialog, setThankyouDialog] = useState(false)
 
-    const showThankYouMessage = () => {
-        setThankyouDialog(true)
-        dispatch({ type: CLEAR_CART })   // need to call api for updating in database as well, dummy for now
+    const showThankYouMessage = async () => {
+        const response = await axios.put(`${serverUrl}/api/carts`, {}, { headers: token })
+        if (response.status === 200) {
+            dispatch({ type: CLEAR_CART })
+            setThankyouDialog(true)
+            toast.success('Checkout Success')
+        } else {
+            toast.error('Checkout Error')
+        }
     }
 
     return (

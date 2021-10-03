@@ -180,4 +180,30 @@ const deleteProductFromCart = async (req, res) => {
 }
 
 
-module.exports = { getCartByUserID, addIteminCart, updateIteminCart, deleteProductFromCart }
+const emptyCartWhenCheckout = async (req, res) => {
+    try {
+
+        const userId = req.user
+        
+        let cart = await Cart.findOne({ user: userId })
+
+        const updatedDetails = {
+            user: cart.user,
+            productsinCart: []
+        }
+
+        const updatedCart = await Cart.findOneAndUpdate({ _id: cart._id }, { $set: updatedDetails }, { new: true })
+
+        res.send(updatedCart)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+}
+module.exports = {
+    getCartByUserID,
+    addIteminCart,
+    updateIteminCart,
+    deleteProductFromCart,
+    emptyCartWhenCheckout
+}

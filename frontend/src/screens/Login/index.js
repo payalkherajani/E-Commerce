@@ -27,8 +27,8 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post(`${serverUrl}/api/users/login`, formData);
-            dispatch({ type: USER_LOGGED_IN, payload: data.user })
+            const response = await axios.post(`${serverUrl}/api/users/login`, formData);
+            dispatch({ type: USER_LOGGED_IN, payload: response.data.user })
             history.push("/products");
         } catch (err) {
             const error = err.response.data.message;
@@ -71,6 +71,12 @@ const Login = () => {
                             />
                         </div>
                         <button className={`btn btn-primary ${styles.login_button}`}>Login</button>
+                        <button className={`btn btn-info ${styles.login_button}`} style={{ marginLeft: '1rem' }} onClick={() => {
+                            setFormData({
+                                email: 'guestuser@gmail.com',
+                                password: '123456'
+                            })
+                        }}>Guest Login</button>
                     </form>
                 </div>
             )
