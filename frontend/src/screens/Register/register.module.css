@@ -1,0 +1,37 @@
+.login__container{
+    margin-top: 8rem;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.input_login {
+    padding: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #909090;
+    font-size: 20px;
+    width: 80%;
+  }
+
+  .login_button {
+    padding: 10px 20px;
+    margin-top: 1rem;
+  }
+
+  .form_container{
+      width: 100%;
+      margin-bottom: 1rem;
+  }
+
+  @media only screen and (min-width:768px){
+    .login__container{
+      margin-top: 2rem;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+     }
+     .form{
+       width: 60%;
+     }
+  }

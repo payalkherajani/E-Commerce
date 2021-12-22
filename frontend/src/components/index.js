@@ -5,3 +5,4 @@ export { default as Navbar } from './Navbar';
 export { default as Sidebar } from './Sidebar';
 export { default as Rating } from './Rating';
 export { default as Searchbar } from './Searchbar';
+export { default as Footer } from './Footer'

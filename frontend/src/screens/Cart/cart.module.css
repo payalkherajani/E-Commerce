@@ -2,6 +2,7 @@
     min-height: 100vh;
     margin-top: 8rem;
     font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 .cart_heading{
     display: flex;
@@ -33,6 +34,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.checkout_container{
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 @media only screen and (min-width: 700px){

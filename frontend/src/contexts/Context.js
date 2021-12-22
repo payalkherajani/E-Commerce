@@ -11,7 +11,9 @@ const initialState = {
     loading: false,
     product: {},
     sortBy: '',
-    keyword: ''
+    keyword: '',
+    user: {},
+    exclude_out_of_stock: false
 }
 
 export const Provider = ({ children }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import useCustomContext from '../customHooks/Hook';
-import { SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH } from '../constants/FilterConstants';
+import { SEARCH_KEYWORD_REQUEST, CLEAR_SEARCH } from '../constants/type';
 
 const Searchbar = () => {
 
@@ -15,9 +15,12 @@ const Searchbar = () => {
     }
 
     return (
-        <div className="searchbar">
-            <input type="text" className="form-control width-half" placeholder="Search Product ..." onChange={handleSearch} value={state.keyword} />
-            <i className="fas fa-times search-icon" onClick={clearSearch}></i>
+        <div className="searchbar-div">
+            <h4 className="searchbar-name"> Welcome {state.user.name}</h4>
+            <div className="searchbar">
+                <input type="text" className="form-control width-half" placeholder="Search Product ..." onChange={handleSearch} value={state.keyword} />
+                <i className="fas fa-times search-icon" onClick={clearSearch}></i>
+            </div>
         </div>
     )
 }
